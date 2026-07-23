@@ -1,0 +1,180 @@
+aid: vanquis-banking-group
+url: https://raw.githubusercontent.com/api-evangelist/vanquis-banking-group/refs/heads/main/apis.yml
+name: Vanquis Banking Group
+kind: company
+description: >-
+  Vanquis Banking Group plc (formerly Provident Financial plc, rebranded 2023)
+  is a UK specialist non-prime lender and savings bank headquartered in Bradford,
+  England, listed on the London Stock Exchange under the ticker VANQ and serving
+  around 1.75 million customers under the Vanquis, Moneybarn and Snoop brands. It
+  offers credit cards, unsecured personal loans, second-charge mortgages, retail
+  savings (easy-access, fixed-rate, notice and ISA accounts) and consumer vehicle
+  finance to customers underserved by mainstream lenders. Its banking subsidiary,
+  Vanquis Bank Limited, is authorised by the Prudential Regulation Authority and
+  regulated by the Financial Conduct Authority (Financial Services Register
+  no. 221156) and, as an FCA-authorised ASPSP, is a UK Open Banking participant
+  (not one of the CMA9). Vanquis exposes the OBIE Read/Write API family - Account
+  and Transaction Information (AIS), Payment Initiation (PIS) and Confirmation of
+  Funds (CBPII) at v3.1.10 - plus Dynamic Client Registration, onboarded and
+  secured through the Open Banking Directory under the PSD2 / FAPI security
+  profile (OAuth2/OIDC, mutual-TLS and strong customer authentication). As a
+  credit-card and savings specialist with no branch or current-account estate,
+  Vanquis publishes no public Open Data (ATM/Branch/PCA/BCA) API.
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve onboarding via Open Banking Directory
+  confidence: medium
+  source:
+  - authentication
+  - onboarding
+  generated: '2026-07-23'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Financial Services
+- Banking
+- Open Banking
+- PSD2
+- OBIE
+- United Kingdom
+- Specialist Lender
+- Credit Cards
+- Account Information
+- Payments
+created: '2026-07-23'
+modified: '2026-07-23'
+specificationVersion: '0.19'
+apis:
+- aid: vanquis-banking-group:vanquis-account-transaction-api
+  name: Vanquis Bank Account and Transaction API (AIS)
+  description: >-
+    Vanquis Bank's OBIE Read/Write Account and Transaction Information API (AISP),
+    conformant to the Open Banking Implementation Entity Read/Write Data API
+    Standard v3.1.10. Enables authorised Account Information Service Providers to
+    access account, balance and transaction data with customer consent, secured
+    under the PSD2 / FAPI profile (OAuth2/OIDC, mutual-TLS, SCA). The production
+    host is provisioned to each TPP during Open Banking Directory onboarding and
+    is not publicly published; the harvested OpenAPI is the shared OBIE standard
+    contract Vanquis conforms to, not a Vanquis-proprietary document.
+  humanURL: https://www.vanquis.com/developer-portal/
+  baseURL: ''
+  tags:
+  - Account Information
+  - AISP
+  - Open Banking
+  properties:
+  - type: OpenAPI
+    url: openapi/obie-account-info-openapi.yaml
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937820271/Account+and+Transaction+API+Specification+-+v3.1
+  - type: APIReference
+    url: https://www.vanquis.com/developer-portal/
+  - type: DeveloperPortal
+    url: https://www.vanquis.com/developer-portal/
+- aid: vanquis-banking-group:vanquis-payment-initiation-api
+  name: Vanquis Bank Payment Initiation API (PIS)
+  description: >-
+    Vanquis Bank's OBIE Read/Write Payment Initiation API (PISP), conformant to
+    the Open Banking Implementation Entity Read/Write API Standard v3.1.10.
+    Enables authorised Payment Initiation Service Providers to initiate payments
+    from a customer account with consent, secured under the PSD2 / FAPI profile
+    (OAuth2/OIDC, mutual-TLS, SCA). The production host is provisioned per TPP
+    during Open Banking Directory onboarding and is not publicly published; the
+    harvested OpenAPI is the shared OBIE standard contract, not a Vanquis
+    proprietary document.
+  humanURL: https://www.vanquis.com/developer-portal/
+  baseURL: ''
+  tags:
+  - Payment Initiation
+  - PISP
+  - Open Banking
+  properties:
+  - type: OpenAPI
+    url: openapi/obie-payment-initiation-openapi.yaml
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937754701/Payment+Initiation+API+Specification+-+v3.1
+  - type: APIReference
+    url: https://www.vanquis.com/developer-portal/
+  - type: DeveloperPortal
+    url: https://www.vanquis.com/developer-portal/
+- aid: vanquis-banking-group:vanquis-confirmation-of-funds-api
+  name: Vanquis Bank Confirmation of Funds API (CBPII)
+  description: >-
+    Vanquis Bank's OBIE Read/Write Confirmation of Funds API (CBPII), conformant
+    to the Open Banking Implementation Entity Read/Write API Standard v3.1.10.
+    Allows authorised Card Based Payment Instrument Issuers to confirm the
+    availability of funds on a customer account with consent, secured under the
+    PSD2 / FAPI profile (OAuth2/OIDC, mutual-TLS, SCA). The production host is
+    provisioned per TPP during Open Banking Directory onboarding and is not
+    publicly published; the harvested OpenAPI is the shared OBIE standard
+    contract, not a Vanquis proprietary document.
+  humanURL: https://www.vanquis.com/developer-portal/
+  baseURL: ''
+  tags:
+  - Confirmation of Funds
+  - CBPII
+  - Open Banking
+  properties:
+  - type: OpenAPI
+    url: openapi/obie-confirmation-funds-openapi.yaml
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937951380/Confirmation+of+Funds+API+Specification+-+v3.1
+  - type: APIReference
+    url: https://www.vanquis.com/developer-portal/
+  - type: DeveloperPortal
+    url: https://www.vanquis.com/developer-portal/
+- aid: vanquis-banking-group:vanquis-dynamic-client-registration-api
+  name: Vanquis Bank Dynamic Client Registration API
+  description: >-
+    Vanquis Bank's OpenID / OBIE Dynamic Client Registration (DCR) endpoint,
+    documented on the Vanquis developer portal, allowing onboarded Third Party
+    Providers to register OAuth clients programmatically using OBIE/eIDAS
+    certificates as part of the Open Banking Directory enrolment flow. The
+    production host is provisioned per TPP during onboarding and is not publicly
+    published; no Vanquis-proprietary OpenAPI is published for this surface.
+  humanURL: https://www.vanquis.com/developer-portal/
+  baseURL: ''
+  tags:
+  - Dynamic Client Registration
+  - Onboarding
+  - Open Banking
+  properties:
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/36667724/The+OpenBanking+OpenID+Dynamic+Client+Registration+Specification+-+v1.0.0-rc2
+  - type: APIReference
+    url: https://www.vanquis.com/developer-portal/
+  - type: DeveloperPortal
+    url: https://www.vanquis.com/developer-portal/
+common:
+- type: Website
+  url: https://www.vanquis.com/
+- type: Website
+  name: Group / Investor site
+  url: https://www.vanquisbankinggroup.com/
+- type: DeveloperPortal
+  url: https://www.vanquis.com/developer-portal/
+- type: Documentation
+  url: https://openbanking.atlassian.net/wiki/spaces/DZ/overview
+- type: SignUp
+  url: https://directory.openbanking.org.uk/s/login/SelfRegister
+- type: Support
+  url: https://directory.openbanking.org.uk/obieservicedesk/s/
+- type: LinkedIn
+  url: https://www.linkedin.com/company/vanquis/
+- type: TermsOfService
+  url: https://www.vanquis.com/legal/terms-of-use/
+- type: PrivacyPolicy
+  url: https://www.vanquis.com/legal/privacy/
+- type: Contact
+  url: https://www.vanquis.com/contact-us/
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

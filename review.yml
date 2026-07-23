@@ -1,0 +1,109 @@
+aid: vanquis-banking-group
+name: Vanquis Banking Group
+review:
+  question: >-
+    Does Vanquis Banking Group expose a confirmed public Open Data API, and what
+    is its documented UK Open Banking (OBIE Read/Write) posture and auth model?
+  answer: false
+  date: '2026-07-23'
+  reviewer: API Evangelist
+  openDataConfirmed: false
+  readWriteDocumented: true
+  specProvenance: obie-standard
+findings:
+  summary: |
+    Vanquis Banking Group plc (formerly Provident Financial plc) is a UK
+    specialist non-prime lender and savings bank whose banking subsidiary,
+    Vanquis Bank Limited, is an FCA-authorised ASPSP (FS Register no. 221156)
+    and a voluntary UK Open Banking participant - it is NOT one of the CMA9
+    mandated banks.
+
+    DEVELOPER PORTAL: Confirmed live at https://www.vanquis.com/developer-portal/
+    (HTTP 200; www.vanquis.co.uk 301-redirects there). It documents four Open
+    Banking surfaces available through the Open Banking Directory sandbox and
+    production: Account & Transaction (AIS), Payment Initiation (PIS),
+    Confirmation of Funds (CBPII), and Dynamic Client Registration (DCR). The
+    portal links to the OBIE v3.1 Read/Write specifications and to the OBIE
+    security profile; third-party tracker data records Vanquis conforming to
+    v3.1.10 of the AISP, PISP and CBPII specifications.
+
+    READ/WRITE CONFORMANCE + AUTH MODEL: The Read/Write APIs are FAPI-secured -
+    OAuth2/OIDC, PSD2 strong customer authentication (SCA), mutual-TLS client
+    authentication, and dynamic client registration using OBIE/eIDAS
+    certificates. Access requires enrolment in the Open Banking Directory; the
+    production API host is provisioned per TPP during onboarding and is NOT
+    publicly published, so no public production base URL could be confirmed.
+
+    SPEC PROVENANCE: No Vanquis-proprietary OpenAPI is published. The three
+    harvested specs under openapi/ are the SHARED OBIE Read/Write standard
+    contracts at v3.1.10 (Account and Transaction, Payment Initiation,
+    Confirmation of Funds), downloaded verbatim from OpenBankingUK/read-write-api-specs
+    (tag v3.1.10), matching Vanquis's stated conformance version. They are the
+    industry standard, not a Vanquis-authored contract, and their server blocks
+    carry only the OBIE-standard relative paths (/open-banking/v3.1/{aisp|pisp|cbpii}).
+
+    OPEN DATA: NOT confirmed and not applicable. As a credit-card and savings
+    specialist with no branch estate, ATMs, or current accounts, Vanquis
+    publishes no public Open Data (ATM/Branch/PCA/BCA) API. Direct probes of
+    candidate Open Data paths returned 301 redirects to the marketing homepage
+    with content-type text/html - a soft 404, not a JSON API surface. No Open
+    Data host exists to represent, so none was invented.
+  probes:
+    - url: https://www.vanquis.com/developer-portal/
+      status: 200
+      note: Live developer portal; lists AIS/PIS/CBPII/DCR and links to OBIE v3.1 specs.
+    - url: https://www.vanquisbankinggroup.com/
+      status: 200
+      note: Group/investor site; 301-redirects to https://www.vanquis.com/investors/.
+    - url: https://www.vanquis.co.uk/open-banking/v2.3/atms
+      status: 301
+      note: Redirects to https://www.vanquis.com/ and returns text/html (soft 404). No Open Data JSON.
+    - url: https://www.vanquis.co.uk/open-banking/v3.1/atms
+      status: 301
+      note: Redirects to marketing homepage, text/html. No live Open Data endpoint.
+    - url: https://www.vanquis.co.uk/.well-known/open-banking
+      status: 301
+      note: Redirects to homepage, text/html. No .well-known Open Banking discovery document served publicly.
+  transports:
+    - protocol: REST
+      scheme: https
+      documented: true
+      note: >-
+        OBIE Read/Write REST APIs (AIS/PIS/CBPII) documented via the developer
+        portal; production host issued per TPP at onboarding, not public.
+    - protocol: OpenData
+      scheme: https
+      documented: false
+      note: >-
+        No public Open Data (ATM/Branch/PCA/BCA) API. Not applicable to a
+        credit-card/savings specialist; candidate paths soft-404.
+  authModel:
+    profile: FAPI (OBIE Security Profile)
+    mechanisms:
+      - OAuth2 / OpenID Connect
+      - PSD2 Strong Customer Authentication (SCA)
+      - Mutual-TLS client authentication
+      - Dynamic Client Registration (OBIE / eIDAS certificates)
+    directory: Open Banking Directory (self-register + sandbox before production)
+sources:
+  - url: https://www.vanquis.com/developer-portal/
+    type: DeveloperPortal
+    note: Vanquis Open Banking developer portal; AIS/PIS/CBPII/DCR + OBIE v3.1 spec links.
+  - url: https://www.openbankingtracker.com/provider/vanquis-bank
+    type: Reference
+    note: Records Vanquis supporting AISP/PISP/CBPII at v3.1.10 and lists aggregator coverage.
+  - url: https://en.wikipedia.org/wiki/Vanquis_Banking_Group
+    type: Reference
+    note: Corporate identity - formerly Provident Financial plc, LSE ticker VANQ, ~1.75m customers, Vanquis/Moneybarn/Snoop brands.
+  - url: https://github.com/OpenBankingUK/read-write-api-specs
+    type: SourceRepository
+    note: Origin of the harvested shared OBIE Read/Write standard specs at tag v3.1.10.
+actions:
+  openapiHarvested: true
+  openapiProvenance: >-
+    Shared OBIE Read/Write standard v3.1.10 (OpenBankingUK/read-write-api-specs),
+    not Vanquis-proprietary. Three specs saved verbatim under openapi/.
+  openDataInvented: false
+  reason: >-
+    Real developer portal and documented OBIE Read/Write posture captured;
+    Open Data neither confirmed nor invented because Vanquis publishes none.
