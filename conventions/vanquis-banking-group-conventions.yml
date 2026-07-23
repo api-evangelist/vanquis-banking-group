@@ -1,0 +1,69 @@
+generated: '2026-07-23'
+method: derived
+source: openapi/*.yaml (OBIE Read/Write v3.1.10) + OBIE Read/Write API standard
+description: >-
+  Cross-cutting request/response conventions for Vanquis Bank's OBIE Read/Write
+  v3.1.10 APIs, derived from the OpenAPI header parameters, response envelopes and
+  the OBIE Read/Write API standard Vanquis conforms to.
+authentication:
+  style: oauth2
+  detail: >-
+    Bearer access token in the Authorization header. TPP-level access uses the
+    client_credentials flow (TPPOAuth2Security); PSU resource access uses the
+    authorization_code / OIDC hybrid flow (PSUOAuth2Security) with strong customer
+    authentication. Mutual-TLS with OBIE/eIDAS transport certificates is required.
+  see: authentication/vanquis-banking-group-authentication.yml
+idempotency:
+  supported: true
+  header: x-idempotency-key
+  required_on: POST payment-order and consent creation operations (PIS, CBPII)
+  retention: 24 hours
+  value_constraints: string, maxLength 40, non-blank
+  duplicate_error: UK.OBIE.Rules.DuplicateReference
+  note: >-
+    Every request is processed only once per x-idempotency-key within the 24-hour
+    window; replaying the same key returns the original result rather than creating
+    a duplicate payment.
+message_signing:
+  header: x-jws-signature
+  detail: >-
+    Detached JWS signature over the request/response body on payment operations,
+    validated against the TPP's OBIE signing certificate for message integrity and
+    non-repudiation.
+request_tracing:
+  header: x-fapi-interaction-id
+  detail: >-
+    FAPI interaction id echoed by the ASPSP to correlate a request/response pair
+    across systems for audit and support.
+fapi_headers:
+  - name: x-fapi-auth-date
+    detail: Time the PSU last authenticated with the TPP.
+  - name: x-fapi-customer-ip-address
+    detail: PSU IP address when the PSU is present.
+  - name: x-fapi-interaction-id
+    detail: Unique interaction correlation id.
+  - name: x-customer-user-agent
+    detail: PSU user-agent when the PSU is present.
+pagination:
+  style: links-and-meta
+  detail: >-
+    Collection responses (accounts, transactions, statements, etc.) carry an OBIE
+    Links object (Self/First/Prev/Next/Last) and a Meta object (TotalPages,
+    FirstAvailableDateTime/LastAvailableDateTime) for paging and windowing.
+  request_params: [fromBookingDateTime, toBookingDateTime, page]
+  response_fields: [Links.Next, Links.Prev, Meta.TotalPages]
+versioning:
+  scheme: uri-path
+  current: v3.1.10
+  detail: OBIE Read/Write major.minor in the base path, e.g. /open-banking/v3.1/aisp
+  see: lifecycle/vanquis-banking-group-lifecycle.yml
+error_envelope:
+  media_type: application/json
+  schema: OBErrorResponse1
+  detail: Code + Id + Message + Errors[] (OBError1 with UK.OBIE.* namespaced ErrorCode)
+  see: errors/vanquis-banking-group-problem-types.yml
+rate_limiting:
+  detail: >-
+    OBIE polling and submission limits apply; over-limit requests return HTTP 429.
+    Exact per-endpoint limits are set by Vanquis on the production host provisioned
+    per TPP and are not published in the standard spec.

@@ -1,0 +1,31 @@
+# Vanquis Banking Group
+
+> Vanquis Banking Group plc (formerly Provident Financial) is a UK specialist non-prime lender and savings bank. Its banking subsidiary, Vanquis Bank Limited, is an FCA-authorised ASPSP (FS Register no. 221156) and a voluntary UK Open Banking participant (not one of the CMA9). It exposes the OBIE Read/Write v3.1.10 API family — Account & Transaction (AIS), Payment Initiation (PIS), Confirmation of Funds (CBPII) — plus Dynamic Client Registration, secured under the PSD2 / FAPI profile (OAuth2/OIDC, mutual-TLS, SCA) and onboarded through the Open Banking Directory. The production API host is provisioned per TPP at onboarding and is not public; the OpenAPIs here are the shared OBIE standard contracts Vanquis conforms to.
+
+## APIs
+- [Account and Transaction API (AIS)](https://www.vanquis.com/developer-portal/): OBIE Read/Write AISP v3.1.10 — account, balance, transaction, statement and party data with PSU consent.
+- [Payment Initiation API (PIS)](https://www.vanquis.com/developer-portal/): OBIE Read/Write PISP v3.1.10 — domestic/international/file payments, scheduled payments and standing orders.
+- [Confirmation of Funds API (CBPII)](https://www.vanquis.com/developer-portal/): OBIE Read/Write CBPII v3.1.10 — confirm availability of funds on a card-based payment instrument.
+- [Dynamic Client Registration](https://www.vanquis.com/developer-portal/): OBIE/OpenID DCR v1.0.0-rc2 — programmatic OAuth client registration with OBIE/eIDAS certificates.
+
+## Specs
+- openapi/obie-account-info-openapi.yaml (OpenAPI 3.0.0, 29 operations)
+- openapi/obie-payment-initiation-openapi.yaml (OpenAPI 3.0.0, 41 operations)
+- openapi/obie-confirmation-funds-openapi.yaml (OpenAPI 3.0.0, 4 operations)
+
+## Artifacts
+- authentication/vanquis-banking-group-authentication.yml — OAuth2 (client_credentials + authorization_code) auth profile
+- scopes/vanquis-banking-group-scopes.yml — OAuth scopes (accounts, payments, fundsconfirmations)
+- conventions/vanquis-banking-group-conventions.yml — idempotency (x-idempotency-key, 24h), FAPI headers, JWS signing, pagination
+- errors/vanquis-banking-group-problem-types.yml — OBIE OBErrorResponse1 envelope + UK.OBIE.* error codes
+- conformance/vanquis-banking-group-conformance.yml — OAuth2/OIDC/FAPI/PSD2/mutual-TLS/OBIE conformance
+- lifecycle/vanquis-banking-group-lifecycle.yml — uri-path versioning v3.1.10, OBIE deprecation governance
+- agentic-access/vanquis-banking-group-agentic-access.yml — recommended x-agentic-access contracts (74 ops)
+- security/vanquis-banking-group-domain-security.yml — TLS/HSTS/DNS posture
+
+## Docs
+- [Vanquis Developer Portal](https://www.vanquis.com/developer-portal/)
+- [OBIE Read/Write Account & Transaction spec](https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937820271/Account+and+Transaction+API+Specification+-+v3.1)
+- [OBIE Read/Write Payment Initiation spec](https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937754701/Payment+Initiation+API+Specification+-+v3.1)
+- [OBIE Read/Write Confirmation of Funds spec](https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937951380/Confirmation+of+Funds+API+Specification+-+v3.1)
+- [Open Banking Directory (onboarding)](https://directory.openbanking.org.uk/s/login/SelfRegister)

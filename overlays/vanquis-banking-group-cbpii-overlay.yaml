@@ -1,0 +1,12 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Vanquis Bank Confirmation of Funds (CBPII)
+  version: 1.0.0
+extends: openapi/obie-confirmation-funds-openapi.yaml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: vanquis-banking-group
+    x-apievangelist-spec-provenance: OBIE Read/Write standard v3.1.10 (not Vanquis-proprietary)
+    x-apievangelist-security-profile: PSD2 / FAPI 1.0 Advanced (OAuth2/OIDC, mutual-TLS, SCA)
+    x-apievangelist-idempotency-header: x-idempotency-key (24h retention)

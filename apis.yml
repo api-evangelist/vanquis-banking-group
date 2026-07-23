@@ -154,6 +154,14 @@ apis:
   - type: DeveloperPortal
     url: https://www.vanquis.com/developer-portal/
 common:
+- type: DomainSecurity
+  url: security/vanquis-banking-group-domain-security.yml
+- type: AgenticAccess
+  url: agentic-access/vanquis-banking-group-agentic-access.yml
+- type: OAuthScopes
+  url: scopes/vanquis-banking-group-scopes.yml
+- type: Authentication
+  url: authentication/vanquis-banking-group-authentication.yml
 - type: Website
   url: https://www.vanquis.com/
 - type: Website
@@ -175,6 +183,39 @@ common:
   url: https://www.vanquis.com/legal/privacy/
 - type: Contact
   url: https://www.vanquis.com/contact-us/
+- type: ErrorCatalog
+  url: errors/vanquis-banking-group-problem-types.yml
+- type: Conformance
+  url: conformance/vanquis-banking-group-conformance.yml
+- type: Lifecycle
+  url: lifecycle/vanquis-banking-group-lifecycle.yml
+- type: Deprecation
+  url: lifecycle/vanquis-banking-group-lifecycle.yml
+- type: Conventions
+  url: conventions/vanquis-banking-group-conventions.yml
+- type: Idempotency
+  url: conventions/vanquis-banking-group-conventions.yml
+- type: MCPServer
+  url: mcp/vanquis-banking-group-mcp.yml
+- type: LLMsTxt
+  url: llms/vanquis-banking-group-llms.txt
+- type: Overlay
+  name: Account and Transaction (AIS) enhancements
+  url: overlays/vanquis-banking-group-aisp-overlay.yaml
+- type: Overlay
+  name: Payment Initiation (PIS) enhancements
+  url: overlays/vanquis-banking-group-pisp-overlay.yaml
+- type: Overlay
+  name: Confirmation of Funds (CBPII) enhancements
+  url: overlays/vanquis-banking-group-cbpii-overlay.yaml
+- type: DataModel
+  url: data-model/vanquis-banking-group-data-model.yml
+- type: AgentSkill
+  name: Read Vanquis account and transaction data (AIS)
+  url: skills/vanquis-read-account-transactions.md
+- type: AgentSkill
+  name: Initiate a domestic payment from Vanquis (PIS)
+  url: skills/vanquis-initiate-domestic-payment.md
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

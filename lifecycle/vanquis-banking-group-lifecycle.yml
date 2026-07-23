@@ -1,0 +1,27 @@
+generated: '2026-07-23'
+method: derived
+source: openapi/*.yaml + OBIE Read/Write standard release governance
+description: >-
+  Versioning and lifecycle posture for Vanquis Bank's OBIE Read/Write surfaces.
+  Vanquis conforms to a centrally-governed standard (the OBIE / Open Banking Ltd
+  Read/Write API Standard), so its version lifecycle tracks the OBIE release
+  train rather than a Vanquis-proprietary cadence.
+versioning:
+  scheme: uri-path
+  current: v3.1.10
+  pattern: /open-banking/v3.1/{aisp|pisp|cbpii}
+  governed_by: Open Banking Limited (OBIE) Read/Write API Standard
+deprecation:
+  policy: >-
+    Version deprecation follows OBIE standard governance: superseded minor
+    versions are announced and retired on the OBIE release schedule, with ASPSPs
+    (including Vanquis) migrating within OBIE-published windows.
+  sunset_header: false
+  docs: https://standards.openbanking.org.uk/
+sla:
+  detail: >-
+    Availability and performance are governed by FCA / PSD2 API performance and
+    availability reporting obligations for ASPSPs; Vanquis publishes no standalone
+    public SLA document for the dedicated interface.
+status_page: null
+deprecated_operations: []

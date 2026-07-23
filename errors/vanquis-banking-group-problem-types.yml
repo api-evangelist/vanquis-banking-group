@@ -1,0 +1,116 @@
+generated: '2026-07-23'
+method: derived
+source: openapi/obie-account-info-openapi.yaml, openapi/obie-payment-initiation-openapi.yaml,
+  openapi/obie-confirmation-funds-openapi.yaml
+format: obie-error-response
+description: >-
+  Error catalogue derived from the OBIE Read/Write v3.1.10 specifications Vanquis
+  Bank conforms to. Errors are returned NOT as RFC 9457 problem+json but in the
+  OBIE OBErrorResponse1 envelope (application/json): a top-level Code (categorising
+  the HTTP failure), an Id (audit reference), a Message, and an Errors[] array of
+  OBError1 objects each carrying a low-level namespaced ErrorCode (UK.OBIE.*), a
+  human Message, and an optional Path/Url. The HTTP status classes below are
+  common across all four Read/Write surfaces (AIS, PIS, CBPII).
+envelope:
+  media_type: application/json
+  schema: OBErrorResponse1
+  fields:
+    Code: High-level textual error code categorising the failure (maxLength 40)
+    Id: Unique reference for the error instance, for audit / support (maxLength 40)
+    Message: Brief high-level failure message
+    Errors: Array of OBError1 detail objects
+  detail_schema: OBError1
+  detail_fields:
+    ErrorCode: Low-level namespaced code, e.g. UK.OBIE.Field.Missing
+    Message: Human-readable detail message
+    Path: JSON path of the offending field (optional)
+    Url: URL to remediation documentation (optional)
+http_statuses:
+  - status: 400
+    title: Bad Request
+    meaning: Request validation failed (missing/invalid field, header, or signature).
+    remediation: Inspect Errors[] for the specific UK.OBIE.* code and correct the request.
+  - status: 401
+    title: Unauthorized
+    meaning: Missing, invalid, or expired access token / consent; SCA re-authentication required.
+    remediation: Re-run the OAuth2/OIDC authorization and consent flow (UK.OBIE.Reauthenticate).
+  - status: 403
+    title: Forbidden
+    meaning: Token/consent does not grant access to the requested resource or scope.
+    remediation: Ensure the consent covers the resource and the correct scope (accounts/payments/fundsconfirmations) was granted.
+  - status: 404
+    title: Not Found
+    meaning: The requested resource (account, consent, payment) does not exist.
+    remediation: Verify the resource id; consent may have expired or been revoked.
+  - status: 405
+    title: Method Not Allowed
+    meaning: HTTP method not supported on this resource.
+  - status: 406
+    title: Not Acceptable
+    meaning: Accept header requests an unsupported representation.
+    remediation: Request application/json.
+  - status: 415
+    title: Unsupported Media Type
+    meaning: Request Content-Type is not application/json.
+  - status: 429
+    title: Too Many Requests
+    meaning: Rate/polling limit exceeded (AIS polling and PIS submission limits per OBIE).
+    remediation: Honour Retry-After and back off; align to OBIE polling cadence.
+  - status: 500
+    title: Internal Server Error
+    meaning: Unexpected ASPSP-side failure (UK.OBIE.UnexpectedError).
+namespaced_error_codes:
+  - code: UK.OBIE.Field.Expected
+    meaning: A field was expected but a different one was supplied.
+  - code: UK.OBIE.Field.Invalid
+    meaning: A field value is invalid.
+  - code: UK.OBIE.Field.InvalidDate
+    meaning: A date field is invalid or out of range.
+  - code: UK.OBIE.Field.Missing
+    meaning: A required field is missing.
+  - code: UK.OBIE.Field.Unexpected
+    meaning: An unexpected field was supplied.
+  - code: UK.OBIE.Header.Invalid
+    meaning: A request header is invalid.
+  - code: UK.OBIE.Header.Missing
+    meaning: A required header (e.g. x-idempotency-key, x-fapi-interaction-id) is missing.
+  - code: UK.OBIE.Reauthenticate
+    meaning: The PSU must re-authenticate (SCA) to continue.
+  - code: UK.OBIE.Resource.ConsentMismatch
+    meaning: The resource does not match the granted consent.
+  - code: UK.OBIE.Resource.InvalidConsentStatus
+    meaning: The consent is not in a state that permits the operation.
+  - code: UK.OBIE.Resource.InvalidFormat
+    meaning: The resource identifier format is invalid.
+  - code: UK.OBIE.Resource.NotFound
+    meaning: The referenced resource was not found.
+  - code: UK.OBIE.Rules.AfterCutOffDateTime
+    meaning: The request was received after the payment cut-off time.
+  - code: UK.OBIE.Rules.DuplicateReference
+    meaning: A duplicate reference was detected (idempotency / instruction identification).
+  - code: UK.OBIE.Signature.Invalid
+    meaning: The x-jws-signature is invalid.
+  - code: UK.OBIE.Signature.InvalidClaim
+    meaning: A JWS signature claim is invalid.
+  - code: UK.OBIE.Signature.Malformed
+    meaning: The JWS signature is malformed.
+  - code: UK.OBIE.Signature.Missing
+    meaning: A required x-jws-signature header is missing.
+  - code: UK.OBIE.Signature.MissingClaim
+    meaning: A required JWS signature claim is missing.
+  - code: UK.OBIE.Signature.Unexpected
+    meaning: An unexpected JWS signature was supplied.
+  - code: UK.OBIE.UnexpectedError
+    meaning: An unexpected server-side error occurred.
+  - code: UK.OBIE.Unsupported.AccountIdentifier
+    meaning: The account identifier scheme is not supported.
+  - code: UK.OBIE.Unsupported.AccountSecondaryIdentifier
+    meaning: The account secondary identifier is not supported.
+  - code: UK.OBIE.Unsupported.Currency
+    meaning: The requested currency is not supported.
+  - code: UK.OBIE.Unsupported.Frequency
+    meaning: The standing-order/scheduled frequency is not supported.
+  - code: UK.OBIE.Unsupported.LocalInstrument
+    meaning: The payment local instrument is not supported.
+  - code: UK.OBIE.Unsupported.Scheme
+    meaning: The payment scheme is not supported.

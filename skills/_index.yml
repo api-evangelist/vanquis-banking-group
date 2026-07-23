@@ -1,0 +1,25 @@
+generated: '2026-07-23'
+method: generated
+source: openapi/obie-account-info-openapi.yaml, openapi/obie-payment-initiation-openapi.yaml
+note: >-
+  Agent Skills grounded in real OBIE Read/Write v3.1.10 operationIds Vanquis Bank
+  conforms to. Every operation named is verified present in the referenced spec.
+skills:
+  - file: vanquis-read-account-transactions.md
+    name: Read Vanquis account and transaction data (AIS)
+    api: openapi/obie-account-info-openapi.yaml
+    operations:
+      - CreateAccountAccessConsents
+      - GetAccountAccessConsentsConsentId
+      - GetAccounts
+      - GetAccountsAccountIdBalances
+      - GetAccountsAccountIdTransactions
+  - file: vanquis-initiate-domestic-payment.md
+    name: Initiate a domestic payment from Vanquis (PIS)
+    api: openapi/obie-payment-initiation-openapi.yaml
+    operations:
+      - CreateDomesticPaymentConsents
+      - GetDomesticPaymentConsentsConsentId
+      - GetDomesticPaymentConsentsConsentIdFundsConfirmation
+      - CreateDomesticPayments
+      - GetDomesticPaymentsDomesticPaymentId

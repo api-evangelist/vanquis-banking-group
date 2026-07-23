@@ -1,0 +1,74 @@
+generated: '2026-07-23'
+method: derived
+source: openapi/obie-account-info-openapi.yaml + OBIE Read/Write data model
+description: Entity graph derived from the OBIE AIS resource surface Vanquis conforms to. Account is the
+  anchor; consent (AccountAccessConsent) gates access; sub-resources hang off AccountId.
+entities:
+- name: AccountAccessConsent
+  id_field: ConsentId
+  detail: PSU consent authorising an AISP to read account data.
+- name: Account
+  id_field: AccountId
+  detail: A customer account exposed to the AISP under consent.
+- name: Balance
+  detail: Current/available balance for an account.
+- name: Transaction
+  detail: Booked/pending transaction on an account.
+- name: Beneficiary
+- name: DirectDebit
+- name: StandingOrder
+- name: ScheduledPayment
+- name: Statement
+  id_field: StatementId
+- name: Party
+- name: Offer
+- name: Product
+relationships:
+- from: Account
+  type: belongs_to
+  to: AccountAccessConsent
+  via: ConsentId
+- from: Balance
+  type: belongs_to
+  to: Account
+  via: AccountId
+- from: Transaction
+  type: belongs_to
+  to: Account
+  via: AccountId
+- from: Account
+  type: has_many
+  to: Transaction
+  via: AccountId
+- from: Account
+  type: has_many
+  to: Balance
+  via: AccountId
+- from: Account
+  type: has_many
+  to: Beneficiary
+  via: AccountId
+- from: Account
+  type: has_many
+  to: DirectDebit
+  via: AccountId
+- from: Account
+  type: has_many
+  to: StandingOrder
+  via: AccountId
+- from: Account
+  type: has_many
+  to: Statement
+  via: AccountId
+- from: Statement
+  type: has_many
+  to: Transaction
+  via: StatementId
+- from: Account
+  type: has_one
+  to: Party
+  via: AccountId
+- from: Account
+  type: has_one
+  to: Product
+  via: AccountId

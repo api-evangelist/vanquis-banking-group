@@ -1,0 +1,17 @@
+generated: '2026-07-23'
+method: searched
+host: https://www.vanquis.com
+note: The production Open Banking API host is provisioned per TPP during Open Banking Directory onboarding
+  and is not public, so no API-host well-known surface could be probed. The public website hosts return
+  no discovery documents.
+documents:
+- path: /.well-known/security.txt
+  status: 404
+- path: /.well-known/openid-configuration
+  status: 404
+- path: /.well-known/oauth-authorization-server
+  status: 404
+- path: /.well-known/api-catalog
+  status: 404
+- path: /.well-known/ai-plugin.json
+  status: 404

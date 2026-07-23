@@ -1,0 +1,45 @@
+generated: '2026-07-23'
+method: derived
+source: openapi/*.yaml + Vanquis developer portal / OBIE security profile
+description: >-
+  Cross-cutting standards conformance for Vanquis Bank's OBIE Read/Write v3.1.10
+  surfaces, derived from the OpenAPI securitySchemes/paths and the provider's
+  documented Open Banking (PSD2 / FAPI) posture. Vanquis Bank Limited is an
+  FCA-authorised ASPSP participating in UK Open Banking via the Open Banking
+  Directory; it is not one of the CMA9 mandated banks.
+standards:
+  - id: oauth2
+    conforms: true
+    evidence: securitySchemes TPPOAuth2Security (clientCredentials) + PSUOAuth2Security (authorizationCode)
+  - id: oidc
+    conforms: true
+    evidence: OBIE FAPI profile uses OpenID Connect for PSU authentication and consent (SCA)
+  - id: fapi
+    conforms: true
+    evidence: OBIE Read/Write v3.1.x mandates FAPI 1.0 Advanced (signed request objects, JARM/hybrid, PKCE)
+  - id: mutual-tls
+    conforms: true
+    evidence: OBIE requires mutual-TLS client authentication with OBIE/eIDAS transport certificates
+  - id: psd2
+    conforms: true
+    evidence: PSD2 SCA + TPP roles (AISP/PISP/CBPII) via Open Banking Directory
+  - id: open-banking-uk
+    conforms: true
+    evidence: Conforms to OBIE Read/Write Data API Standard v3.1.10 (AIS, PIS, CBPII)
+  - id: dcr-obie
+    conforms: true
+    evidence: OpenBanking OpenID Dynamic Client Registration v1.0.0-rc2 endpoint documented
+  - id: jws-detached-signature
+    conforms: true
+    evidence: x-jws-signature header (detached JWS) on payment operations for message integrity
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: errors use the OBIE OBErrorResponse1 envelope, not application/problem+json
+  - id: json-api
+    conforms: false
+  - id: fhir
+    conforms: false
+  - id: scim
+    conforms: false
+  - id: odata
+    conforms: false
