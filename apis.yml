@@ -47,7 +47,7 @@ tags:
 - Payments
 created: '2026-07-23'
 modified: '2026-07-23'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: vanquis-banking-group:vanquis-account-transaction-api
   name: Vanquis Bank Account and Transaction API (AIS)
