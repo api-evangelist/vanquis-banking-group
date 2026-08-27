@@ -60,96 +60,14 @@ created: '2026-07-23'
 modified: '2026-07-23'
 specificationVersion: '0.23'
 apis:
-- aid: vanquis-banking-group:vanquis-account-transaction-api
-  name: Vanquis Bank Account and Transaction API (AIS)
-  description: >-
-    Vanquis Bank's OBIE Read/Write Account and Transaction Information API (AISP),
-    conformant to the Open Banking Implementation Entity Read/Write Data API
-    Standard v3.1.10. Enables authorised Account Information Service Providers to
-    access account, balance and transaction data with customer consent, secured
-    under the PSD2 / FAPI profile (OAuth2/OIDC, mutual-TLS, SCA). The production
-    host is provisioned to each TPP during Open Banking Directory onboarding and
-    is not publicly published; the harvested OpenAPI is the shared OBIE standard
-    contract Vanquis conforms to, not a Vanquis-proprietary document.
-  humanURL: https://www.vanquis.com/developer-portal/
-  baseURL: ''
-  tags:
-  - Account Information
-  - AISP
-  - Open Banking
-  properties:
-  - type: OpenAPI
-    url: openapi/obie-account-info-openapi.yaml
-  - type: Documentation
-    url: >-
-      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937820271/Account+and+Transaction+API+Specification+-+v3.1
-  - type: APIReference
-    url: https://www.vanquis.com/developer-portal/
-  - type: DeveloperPortal
-    url: https://www.vanquis.com/developer-portal/
-- aid: vanquis-banking-group:vanquis-payment-initiation-api
-  name: Vanquis Bank Payment Initiation API (PIS)
-  description: >-
-    Vanquis Bank's OBIE Read/Write Payment Initiation API (PISP), conformant to
-    the Open Banking Implementation Entity Read/Write API Standard v3.1.10.
-    Enables authorised Payment Initiation Service Providers to initiate payments
-    from a customer account with consent, secured under the PSD2 / FAPI profile
-    (OAuth2/OIDC, mutual-TLS, SCA). The production host is provisioned per TPP
-    during Open Banking Directory onboarding and is not publicly published; the
-    harvested OpenAPI is the shared OBIE standard contract, not a Vanquis
-    proprietary document.
-  humanURL: https://www.vanquis.com/developer-portal/
-  baseURL: ''
-  tags:
-  - Payment Initiation
-  - PISP
-  - Open Banking
-  properties:
-  - type: OpenAPI
-    url: openapi/obie-payment-initiation-openapi.yaml
-  - type: Documentation
-    url: >-
-      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937754701/Payment+Initiation+API+Specification+-+v3.1
-  - type: APIReference
-    url: https://www.vanquis.com/developer-portal/
-  - type: DeveloperPortal
-    url: https://www.vanquis.com/developer-portal/
-- aid: vanquis-banking-group:vanquis-confirmation-of-funds-api
-  name: Vanquis Bank Confirmation of Funds API (CBPII)
-  description: >-
-    Vanquis Bank's OBIE Read/Write Confirmation of Funds API (CBPII), conformant
-    to the Open Banking Implementation Entity Read/Write API Standard v3.1.10.
-    Allows authorised Card Based Payment Instrument Issuers to confirm the
-    availability of funds on a customer account with consent, secured under the
-    PSD2 / FAPI profile (OAuth2/OIDC, mutual-TLS, SCA). The production host is
-    provisioned per TPP during Open Banking Directory onboarding and is not
-    publicly published; the harvested OpenAPI is the shared OBIE standard
-    contract, not a Vanquis proprietary document.
-  humanURL: https://www.vanquis.com/developer-portal/
-  baseURL: ''
-  tags:
-  - Confirmation of Funds
-  - CBPII
-  - Open Banking
-  properties:
-  - type: OpenAPI
-    url: openapi/obie-confirmation-funds-openapi.yaml
-  - type: Documentation
-    url: >-
-      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937951380/Confirmation+of+Funds+API+Specification+-+v3.1
-  - type: APIReference
-    url: https://www.vanquis.com/developer-portal/
-  - type: DeveloperPortal
-    url: https://www.vanquis.com/developer-portal/
 - aid: vanquis-banking-group:vanquis-dynamic-client-registration-api
   name: Vanquis Bank Dynamic Client Registration API
   description: >-
-    Vanquis Bank's OpenID / OBIE Dynamic Client Registration (DCR) endpoint,
-    documented on the Vanquis developer portal, allowing onboarded Third Party
-    Providers to register OAuth clients programmatically using OBIE/eIDAS
-    certificates as part of the Open Banking Directory enrolment flow. The
-    production host is provisioned per TPP during onboarding and is not publicly
-    published; no Vanquis-proprietary OpenAPI is published for this surface.
+    Vanquis Bank's OpenID / OBIE Dynamic Client Registration (DCR) endpoint, documented on the Vanquis
+    developer portal, allowing onboarded Third Party Providers to register OAuth clients programmatically
+    using OBIE/eIDAS certificates as part of the Open Banking Directory enrolment flow. The production
+    host is provisioned per TPP during onboarding and is not publicly published; no Vanquis-proprietary
+    OpenAPI is published for this surface.
   humanURL: https://www.vanquis.com/developer-portal/
   baseURL: ''
   tags:
@@ -164,6 +82,480 @@ apis:
     url: https://www.vanquis.com/developer-portal/
   - type: DeveloperPortal
     url: https://www.vanquis.com/developer-portal/
+- aid: vanquis-banking-group:vanquis-banking-group-account-access-api
+  name: Vanquis Banking Group Account Access API
+  description: The Account Access API from Vanquis Banking Group — 2 operation(s) for account access.
+  humanURL: https://www.vanquis.com/developer-portal/
+  tags:
+  - Account Access
+  properties:
+  - type: OpenAPI
+    url: openapi/vanquis-banking-group-account-access-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937820271/Account+and+Transaction+API+Specification+-+v3.1
+  - type: APIReference
+    url: https://www.vanquis.com/developer-portal/
+  - type: DeveloperPortal
+    url: https://www.vanquis.com/developer-portal/
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937754701/Payment+Initiation+API+Specification+-+v3.1
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937951380/Confirmation+of+Funds+API+Specification+-+v3.1
+- aid: vanquis-banking-group:vanquis-banking-group-accounts-api
+  name: Vanquis Banking Group Accounts API
+  description: The Accounts API from Vanquis Banking Group — 2 operation(s) for accounts.
+  humanURL: https://www.vanquis.com/developer-portal/
+  tags:
+  - Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/vanquis-banking-group-accounts-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937820271/Account+and+Transaction+API+Specification+-+v3.1
+  - type: APIReference
+    url: https://www.vanquis.com/developer-portal/
+  - type: DeveloperPortal
+    url: https://www.vanquis.com/developer-portal/
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937754701/Payment+Initiation+API+Specification+-+v3.1
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937951380/Confirmation+of+Funds+API+Specification+-+v3.1
+- aid: vanquis-banking-group:vanquis-banking-group-balances-api
+  name: Vanquis Banking Group Balances API
+  description: The Balances API from Vanquis Banking Group — 2 operation(s) for balances.
+  humanURL: https://www.vanquis.com/developer-portal/
+  tags:
+  - Balances
+  properties:
+  - type: OpenAPI
+    url: openapi/vanquis-banking-group-balances-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937820271/Account+and+Transaction+API+Specification+-+v3.1
+  - type: APIReference
+    url: https://www.vanquis.com/developer-portal/
+  - type: DeveloperPortal
+    url: https://www.vanquis.com/developer-portal/
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937754701/Payment+Initiation+API+Specification+-+v3.1
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937951380/Confirmation+of+Funds+API+Specification+-+v3.1
+- aid: vanquis-banking-group:vanquis-banking-group-beneficiaries-api
+  name: Vanquis Banking Group Beneficiaries API
+  description: The Beneficiaries API from Vanquis Banking Group — 2 operation(s) for beneficiaries.
+  humanURL: https://www.vanquis.com/developer-portal/
+  tags:
+  - Beneficiaries
+  properties:
+  - type: OpenAPI
+    url: openapi/vanquis-banking-group-beneficiaries-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937820271/Account+and+Transaction+API+Specification+-+v3.1
+  - type: APIReference
+    url: https://www.vanquis.com/developer-portal/
+  - type: DeveloperPortal
+    url: https://www.vanquis.com/developer-portal/
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937754701/Payment+Initiation+API+Specification+-+v3.1
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937951380/Confirmation+of+Funds+API+Specification+-+v3.1
+- aid: vanquis-banking-group:vanquis-banking-group-direct-debits-api
+  name: Vanquis Banking Group Direct Debits API
+  description: The Direct Debits API from Vanquis Banking Group — 2 operation(s) for direct debits.
+  humanURL: https://www.vanquis.com/developer-portal/
+  tags:
+  - Direct Debits
+  properties:
+  - type: OpenAPI
+    url: openapi/vanquis-banking-group-direct-debits-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937820271/Account+and+Transaction+API+Specification+-+v3.1
+  - type: APIReference
+    url: https://www.vanquis.com/developer-portal/
+  - type: DeveloperPortal
+    url: https://www.vanquis.com/developer-portal/
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937754701/Payment+Initiation+API+Specification+-+v3.1
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937951380/Confirmation+of+Funds+API+Specification+-+v3.1
+- aid: vanquis-banking-group:vanquis-banking-group-domestic-payments-api
+  name: Vanquis Banking Group Domestic Payments API
+  description: >-
+    The Domestic Payments API from Vanquis Banking Group — 5 operation(s) for domestic payments.
+  humanURL: https://www.vanquis.com/developer-portal/
+  tags:
+  - Domestic Payments
+  properties:
+  - type: OpenAPI
+    url: openapi/vanquis-banking-group-domestic-payments-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937820271/Account+and+Transaction+API+Specification+-+v3.1
+  - type: APIReference
+    url: https://www.vanquis.com/developer-portal/
+  - type: DeveloperPortal
+    url: https://www.vanquis.com/developer-portal/
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937754701/Payment+Initiation+API+Specification+-+v3.1
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937951380/Confirmation+of+Funds+API+Specification+-+v3.1
+- aid: vanquis-banking-group:vanquis-banking-group-domestic-scheduled-payments-api
+  name: Vanquis Banking Group Domestic Scheduled Payments API
+  description: >-
+    The Domestic Scheduled Payments API from Vanquis Banking Group — 4 operation(s) for domestic scheduled
+    payments.
+  humanURL: https://www.vanquis.com/developer-portal/
+  tags:
+  - Domestic Scheduled Payments
+  properties:
+  - type: OpenAPI
+    url: openapi/vanquis-banking-group-domestic-scheduled-payments-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937820271/Account+and+Transaction+API+Specification+-+v3.1
+  - type: APIReference
+    url: https://www.vanquis.com/developer-portal/
+  - type: DeveloperPortal
+    url: https://www.vanquis.com/developer-portal/
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937754701/Payment+Initiation+API+Specification+-+v3.1
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937951380/Confirmation+of+Funds+API+Specification+-+v3.1
+- aid: vanquis-banking-group:vanquis-banking-group-domestic-standing-orders-api
+  name: Vanquis Banking Group Domestic Standing Orders API
+  description: >-
+    The Domestic Standing Orders API from Vanquis Banking Group — 4 operation(s) for domestic standing
+    orders.
+  humanURL: https://www.vanquis.com/developer-portal/
+  tags:
+  - Domestic Standing Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/vanquis-banking-group-domestic-standing-orders-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937820271/Account+and+Transaction+API+Specification+-+v3.1
+  - type: APIReference
+    url: https://www.vanquis.com/developer-portal/
+  - type: DeveloperPortal
+    url: https://www.vanquis.com/developer-portal/
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937754701/Payment+Initiation+API+Specification+-+v3.1
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937951380/Confirmation+of+Funds+API+Specification+-+v3.1
+- aid: vanquis-banking-group:vanquis-banking-group-file-payments-api
+  name: Vanquis Banking Group File Payments API
+  description: The File Payments API from Vanquis Banking Group — 6 operation(s) for file payments.
+  humanURL: https://www.vanquis.com/developer-portal/
+  tags:
+  - File Payments
+  properties:
+  - type: OpenAPI
+    url: openapi/vanquis-banking-group-file-payments-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937820271/Account+and+Transaction+API+Specification+-+v3.1
+  - type: APIReference
+    url: https://www.vanquis.com/developer-portal/
+  - type: DeveloperPortal
+    url: https://www.vanquis.com/developer-portal/
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937754701/Payment+Initiation+API+Specification+-+v3.1
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937951380/Confirmation+of+Funds+API+Specification+-+v3.1
+- aid: vanquis-banking-group:vanquis-banking-group-funds-confirmations-api
+  name: Vanquis Banking Group Funds Confirmations API
+  description: >-
+    The Funds Confirmations API from Vanquis Banking Group — 3 operation(s) for funds confirmations.
+  humanURL: https://www.vanquis.com/developer-portal/
+  tags:
+  - Funds Confirmations
+  properties:
+  - type: OpenAPI
+    url: openapi/vanquis-banking-group-funds-confirmations-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937820271/Account+and+Transaction+API+Specification+-+v3.1
+  - type: APIReference
+    url: https://www.vanquis.com/developer-portal/
+  - type: DeveloperPortal
+    url: https://www.vanquis.com/developer-portal/
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937754701/Payment+Initiation+API+Specification+-+v3.1
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937951380/Confirmation+of+Funds+API+Specification+-+v3.1
+- aid: vanquis-banking-group:vanquis-banking-group-international-payments-api
+  name: Vanquis Banking Group International Payments API
+  description: >-
+    The International Payments API from Vanquis Banking Group — 5 operation(s) for international payments.
+  humanURL: https://www.vanquis.com/developer-portal/
+  tags:
+  - International Payments
+  properties:
+  - type: OpenAPI
+    url: openapi/vanquis-banking-group-international-payments-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937820271/Account+and+Transaction+API+Specification+-+v3.1
+  - type: APIReference
+    url: https://www.vanquis.com/developer-portal/
+  - type: DeveloperPortal
+    url: https://www.vanquis.com/developer-portal/
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937754701/Payment+Initiation+API+Specification+-+v3.1
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937951380/Confirmation+of+Funds+API+Specification+-+v3.1
+- aid: vanquis-banking-group:vanquis-banking-group-international-scheduled-payments-api
+  name: Vanquis Banking Group International Scheduled Payments API
+  description: >-
+    The International Scheduled Payments API from Vanquis Banking Group — 5 operation(s) for international
+    scheduled payments.
+  humanURL: https://www.vanquis.com/developer-portal/
+  tags:
+  - International Scheduled Payments
+  properties:
+  - type: OpenAPI
+    url: openapi/vanquis-banking-group-international-scheduled-payments-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937820271/Account+and+Transaction+API+Specification+-+v3.1
+  - type: APIReference
+    url: https://www.vanquis.com/developer-portal/
+  - type: DeveloperPortal
+    url: https://www.vanquis.com/developer-portal/
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937754701/Payment+Initiation+API+Specification+-+v3.1
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937951380/Confirmation+of+Funds+API+Specification+-+v3.1
+- aid: vanquis-banking-group:vanquis-banking-group-international-standing-orders-api
+  name: Vanquis Banking Group International Standing Orders API
+  description: >-
+    The International Standing Orders API from Vanquis Banking Group — 4 operation(s) for international
+    standing orders.
+  humanURL: https://www.vanquis.com/developer-portal/
+  tags:
+  - International Standing Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/vanquis-banking-group-international-standing-orders-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937820271/Account+and+Transaction+API+Specification+-+v3.1
+  - type: APIReference
+    url: https://www.vanquis.com/developer-portal/
+  - type: DeveloperPortal
+    url: https://www.vanquis.com/developer-portal/
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937754701/Payment+Initiation+API+Specification+-+v3.1
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937951380/Confirmation+of+Funds+API+Specification+-+v3.1
+- aid: vanquis-banking-group:vanquis-banking-group-offers-api
+  name: Vanquis Banking Group Offers API
+  description: The Offers API from Vanquis Banking Group — 2 operation(s) for offers.
+  humanURL: https://www.vanquis.com/developer-portal/
+  tags:
+  - Offers
+  properties:
+  - type: OpenAPI
+    url: openapi/vanquis-banking-group-offers-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937820271/Account+and+Transaction+API+Specification+-+v3.1
+  - type: APIReference
+    url: https://www.vanquis.com/developer-portal/
+  - type: DeveloperPortal
+    url: https://www.vanquis.com/developer-portal/
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937754701/Payment+Initiation+API+Specification+-+v3.1
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937951380/Confirmation+of+Funds+API+Specification+-+v3.1
+- aid: vanquis-banking-group:vanquis-banking-group-parties-api
+  name: Vanquis Banking Group Parties API
+  description: The Parties API from Vanquis Banking Group — 3 operation(s) for parties.
+  humanURL: https://www.vanquis.com/developer-portal/
+  tags:
+  - Parties
+  properties:
+  - type: OpenAPI
+    url: openapi/vanquis-banking-group-parties-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937820271/Account+and+Transaction+API+Specification+-+v3.1
+  - type: APIReference
+    url: https://www.vanquis.com/developer-portal/
+  - type: DeveloperPortal
+    url: https://www.vanquis.com/developer-portal/
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937754701/Payment+Initiation+API+Specification+-+v3.1
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937951380/Confirmation+of+Funds+API+Specification+-+v3.1
+- aid: vanquis-banking-group:vanquis-banking-group-payment-details-api
+  name: Vanquis Banking Group Payment Details API
+  description: The Payment Details API from Vanquis Banking Group — 7 operation(s) for payment details.
+  humanURL: https://www.vanquis.com/developer-portal/
+  tags:
+  - Payment Details
+  properties:
+  - type: OpenAPI
+    url: openapi/vanquis-banking-group-payment-details-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937820271/Account+and+Transaction+API+Specification+-+v3.1
+  - type: APIReference
+    url: https://www.vanquis.com/developer-portal/
+  - type: DeveloperPortal
+    url: https://www.vanquis.com/developer-portal/
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937754701/Payment+Initiation+API+Specification+-+v3.1
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937951380/Confirmation+of+Funds+API+Specification+-+v3.1
+- aid: vanquis-banking-group:vanquis-banking-group-products-api
+  name: Vanquis Banking Group Products API
+  description: The Products API from Vanquis Banking Group — 2 operation(s) for products.
+  humanURL: https://www.vanquis.com/developer-portal/
+  tags:
+  - Products
+  properties:
+  - type: OpenAPI
+    url: openapi/vanquis-banking-group-products-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937820271/Account+and+Transaction+API+Specification+-+v3.1
+  - type: APIReference
+    url: https://www.vanquis.com/developer-portal/
+  - type: DeveloperPortal
+    url: https://www.vanquis.com/developer-portal/
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937754701/Payment+Initiation+API+Specification+-+v3.1
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937951380/Confirmation+of+Funds+API+Specification+-+v3.1
+- aid: vanquis-banking-group:vanquis-banking-group-scheduled-payments-api
+  name: Vanquis Banking Group Scheduled Payments API
+  description: >-
+    The Scheduled Payments API from Vanquis Banking Group — 2 operation(s) for scheduled payments.
+  humanURL: https://www.vanquis.com/developer-portal/
+  tags:
+  - Scheduled Payments
+  properties:
+  - type: OpenAPI
+    url: openapi/vanquis-banking-group-scheduled-payments-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937820271/Account+and+Transaction+API+Specification+-+v3.1
+  - type: APIReference
+    url: https://www.vanquis.com/developer-portal/
+  - type: DeveloperPortal
+    url: https://www.vanquis.com/developer-portal/
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937754701/Payment+Initiation+API+Specification+-+v3.1
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937951380/Confirmation+of+Funds+API+Specification+-+v3.1
+- aid: vanquis-banking-group:vanquis-banking-group-standing-orders-api
+  name: Vanquis Banking Group Standing Orders API
+  description: The Standing Orders API from Vanquis Banking Group — 2 operation(s) for standing orders.
+  humanURL: https://www.vanquis.com/developer-portal/
+  tags:
+  - Standing Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/vanquis-banking-group-standing-orders-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937820271/Account+and+Transaction+API+Specification+-+v3.1
+  - type: APIReference
+    url: https://www.vanquis.com/developer-portal/
+  - type: DeveloperPortal
+    url: https://www.vanquis.com/developer-portal/
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937754701/Payment+Initiation+API+Specification+-+v3.1
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937951380/Confirmation+of+Funds+API+Specification+-+v3.1
+- aid: vanquis-banking-group:vanquis-banking-group-statements-api
+  name: Vanquis Banking Group Statements API
+  description: The Statements API from Vanquis Banking Group — 4 operation(s) for statements.
+  humanURL: https://www.vanquis.com/developer-portal/
+  tags:
+  - Statements
+  properties:
+  - type: OpenAPI
+    url: openapi/vanquis-banking-group-statements-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937820271/Account+and+Transaction+API+Specification+-+v3.1
+  - type: APIReference
+    url: https://www.vanquis.com/developer-portal/
+  - type: DeveloperPortal
+    url: https://www.vanquis.com/developer-portal/
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937754701/Payment+Initiation+API+Specification+-+v3.1
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937951380/Confirmation+of+Funds+API+Specification+-+v3.1
+- aid: vanquis-banking-group:vanquis-banking-group-transactions-api
+  name: Vanquis Banking Group Transactions API
+  description: The Transactions API from Vanquis Banking Group — 3 operation(s) for transactions.
+  humanURL: https://www.vanquis.com/developer-portal/
+  tags:
+  - Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/vanquis-banking-group-transactions-api-openapi.yml
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937820271/Account+and+Transaction+API+Specification+-+v3.1
+  - type: APIReference
+    url: https://www.vanquis.com/developer-portal/
+  - type: DeveloperPortal
+    url: https://www.vanquis.com/developer-portal/
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937754701/Payment+Initiation+API+Specification+-+v3.1
+  - type: Documentation
+    url: >-
+      https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937951380/Confirmation+of+Funds+API+Specification+-+v3.1
 common:
 - type: DomainSecurity
   url: security/vanquis-banking-group-domain-security.yml
