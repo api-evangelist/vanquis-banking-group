@@ -569,6 +569,9 @@ apis:
     url: >-
       https://openbanking.atlassian.net/wiki/spaces/DZ/pages/937951380/Confirmation+of+Funds+API+Specification+-+v3.1
 common:
+- type: CapabilityMap
+  url: capabilities/vanquis-banking-group-capability-edges.yml
+  name: Vanquis Banking Group Business Capability Map
 - type: DomainSecurity
   url: security/vanquis-banking-group-domain-security.yml
 - type: AgenticAccess

@@ -1,0 +1,115 @@
+slug: vanquis-banking-group
+provider: Vanquis Banking Group
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 10
+edges:
+- tag: Domestic Payments
+  spec_file: vanquis-banking-group-domestic-payments-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.9
+  evidence: POST /domestic-payments  CreateDomesticPayments; POST /domestic-payment-consents  Create Domestic
+    Payment Consents; GET .../funds-confirmation
+  reason: 'Open Banking Payment Initiation API: capture of a domestic payment instruction with consent
+    authorisation and funds confirmation — plainly payment initiation.'
+- tag: Domestic Scheduled Payments
+  spec_file: vanquis-banking-group-domestic-scheduled-payments-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.88
+  evidence: POST /domestic-scheduled-payments  CreateDomesticScheduledPayments; OBWriteDomesticScheduledConsent4
+  reason: Payment Initiation API surface for future-dated domestic payment instructions with consent capture
+    — payment instruction capture, validation and authorisation.
+- tag: International Payments
+  spec_file: vanquis-banking-group-international-payments-api-openapi.yml
+  capability_id: BC-1340.40
+  capability_id_l1: BC-1340
+  capability_name: Cross-Border Payment Management
+  confidence: 0.88
+  evidence: POST /international-payments  CreateInternationalPayments; OBWriteInternationalConsent5
+  reason: Payment Initiation API for cross-border payment instructions with FX/charge bearer details (OBChargeBearerType1Code)
+    — international payment management.
+- tag: Domestic Standing Orders
+  spec_file: vanquis-banking-group-domestic-standing-orders-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.85
+  evidence: POST /domestic-standing-orders  CreateDomesticStandingOrders; OBWriteDomesticStandingOrderConsent5
+  reason: Initiation and consent capture of recurring domestic standing order instructions via the Payment
+    Initiation API — payment initiation management.
+- tag: International Scheduled Payments
+  spec_file: vanquis-banking-group-international-scheduled-payments-api-openapi.yml
+  capability_id: BC-1340.40
+  capability_id_l1: BC-1340
+  capability_name: Cross-Border Payment Management
+  confidence: 0.85
+  evidence: POST /international-scheduled-payments  CreateInternationalScheduledPayments; OBWriteInternationalScheduled3
+  reason: Future-dated cross-border payment initiation with consent and funds confirmation — cross-border
+    payment management.
+- tag: International Standing Orders
+  spec_file: vanquis-banking-group-international-standing-orders-api-openapi.yml
+  capability_id: BC-1340.40
+  capability_id_l1: BC-1340
+  capability_name: Cross-Border Payment Management
+  confidence: 0.85
+  evidence: POST /international-standing-orders  CreateInternationalStandingOrders; OBWriteInternationalStandingOrderConsentResponse7
+  reason: Recurring international payment instruction initiation via Open Banking payment initiation —
+    cross-border payments.
+- tag: File Payments
+  spec_file: vanquis-banking-group-file-payments-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.8
+  evidence: POST /file-payments  CreateFilePayments; POST /file-payment-consents/{ConsentId}/file; OBWriteFileConsent3
+  reason: Bulk/batch payment file submission and consent under the Payment Initiation specification —
+    instruction capture and authorisation of payments (file upload here is the payment channel, not generic
+    plumbing).
+- tag: Parties
+  spec_file: vanquis-banking-group-parties-api-openapi.yml
+  capability_id: BC-1300.40
+  capability_id_l1: BC-1300
+  capability_name: Customer Information Management
+  confidence: 0.7
+  evidence: GET /accounts/{AccountId}/parties  GetAccountsAccountIdParties  Get Parties; schemas PartyId,
+    FullLegalName, OBExternalPartyType1Code, PostCode
+  reason: Open Banking Account & Transaction API 'Parties' resource exposes the account holder / party
+    identity and address data held by the bank — banking customer information, not a generic party technical
+    object. Sub-capability chosen as Customer Information Management since the operations only read customer/party
+    master data.
+- tag: Payment Details
+  spec_file: vanquis-banking-group-payment-details-api-openapi.yml
+  capability_id: BC-1340.10
+  capability_id_l1: BC-1340
+  capability_name: Payment Initiation Management
+  confidence: 0.7
+  evidence: '"Swagger for Payment Initiation API Specification"; GET /domestic-payments/{DomesticPaymentId}/payment-details  Get
+    Payment Details'
+  reason: Part of the Open Banking Payment Initiation API — retrieval of the status/details of payment
+    instructions (domestic, scheduled, standing order, file, international). Clearly payments; placed
+    under Payment Initiation Management because the source spec is the payment initiation surface, though
+    it borders on payment processing/status.
+- tag: Products
+  spec_file: vanquis-banking-group-products-api-openapi.yml
+  capability_id: BC-1310.10
+  capability_id_l1: BC-1310
+  capability_name: Product Catalogue Management
+  confidence: 0.7
+  evidence: GET /products  GetProducts  Get Products; schemas OBPCAData1, OBBCAData1, OB_FeeCategory1Code,
+    OB_InterestRateType1Code_0
+  reason: Open Banking product information endpoints publishing personal/business current account product
+    data including fees and interest rate types — a banking product catalogue read surface. Catalogue
+    vs parameter configuration is somewhat ambiguous since only reads of fee/rate structures are exposed.
