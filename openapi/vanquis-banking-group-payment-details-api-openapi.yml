@@ -1,0 +1,891 @@
+openapi: 3.2.0
+info:
+  title: Payment Initiation Payment Details API
+  description: Swagger for Payment Initiation API Specification
+  termsOfService: https://www.openbanking.org.uk/terms
+  contact:
+    name: Service Desk
+    email: ServiceDesk@openbanking.org.uk
+  license:
+    name: open-licence
+    url: https://www.openbanking.org.uk/open-licence
+  version: 3.1.10
+servers:
+- url: /open-banking/v3.1/pisp
+tags:
+- name: Payment Details
+paths:
+  /domestic-payments/{DomesticPaymentId}/payment-details:
+    get:
+      tags:
+      - Payment Details
+      summary: Get Payment Details
+      operationId: GetDomesticPaymentsDomesticPaymentIdPaymentDetails
+      parameters:
+      - $ref: '#/components/parameters/DomesticPaymentId'
+      - $ref: '#/components/parameters/x-fapi-auth-date'
+      - $ref: '#/components/parameters/x-fapi-customer-ip-address'
+      - $ref: '#/components/parameters/x-fapi-interaction-id'
+      - $ref: '#/components/parameters/Authorization'
+      - $ref: '#/components/parameters/x-customer-user-agent'
+      responses:
+        200:
+          $ref: '#/components/responses/200DomesticPaymentsDomesticPaymentIdPaymentDetailsRead'
+        400:
+          $ref: '#/components/responses/400Error'
+        401:
+          $ref: '#/components/responses/401Error'
+        403:
+          $ref: '#/components/responses/403Error'
+        404:
+          $ref: '#/components/responses/404Error'
+        405:
+          $ref: '#/components/responses/405Error'
+        406:
+          $ref: '#/components/responses/406Error'
+        429:
+          $ref: '#/components/responses/429Error'
+        500:
+          $ref: '#/components/responses/500Error'
+      security:
+      - TPPOAuth2Security:
+        - payments
+  /domestic-scheduled-payments/{DomesticScheduledPaymentId}/payment-details:
+    get:
+      tags:
+      - Payment Details
+      summary: Get Payment Details
+      operationId: GetDomesticScheduledPaymentsDomesticScheduledPaymentIdPaymentDetails
+      parameters:
+      - $ref: '#/components/parameters/DomesticScheduledPaymentId'
+      - $ref: '#/components/parameters/x-fapi-auth-date'
+      - $ref: '#/components/parameters/x-fapi-customer-ip-address'
+      - $ref: '#/components/parameters/x-fapi-interaction-id'
+      - $ref: '#/components/parameters/Authorization'
+      - $ref: '#/components/parameters/x-customer-user-agent'
+      responses:
+        200:
+          $ref: '#/components/responses/200DomesticScheduledPaymentsDomesticScheduledPaymentIdPaymentDetailsRead'
+        400:
+          $ref: '#/components/responses/400Error'
+        401:
+          $ref: '#/components/responses/401Error'
+        403:
+          $ref: '#/components/responses/403Error'
+        404:
+          $ref: '#/components/responses/404Error'
+        405:
+          $ref: '#/components/responses/405Error'
+        406:
+          $ref: '#/components/responses/406Error'
+        429:
+          $ref: '#/components/responses/429Error'
+        500:
+          $ref: '#/components/responses/500Error'
+      security:
+      - TPPOAuth2Security:
+        - payments
+  /domestic-standing-orders/{DomesticStandingOrderId}/payment-details:
+    get:
+      tags:
+      - Payment Details
+      summary: Get Payment Details
+      operationId: GetDomesticStandingOrdersDomesticStandingOrderIdPaymentDetails
+      parameters:
+      - $ref: '#/components/parameters/DomesticStandingOrderId'
+      - $ref: '#/components/parameters/x-fapi-auth-date'
+      - $ref: '#/components/parameters/x-fapi-customer-ip-address'
+      - $ref: '#/components/parameters/x-fapi-interaction-id'
+      - $ref: '#/components/parameters/Authorization'
+      - $ref: '#/components/parameters/x-customer-user-agent'
+      responses:
+        200:
+          $ref: '#/components/responses/200DomesticStandingOrdersDomesticStandingOrderIdPaymentDetailsRead'
+        400:
+          $ref: '#/components/responses/400Error'
+        401:
+          $ref: '#/components/responses/401Error'
+        403:
+          $ref: '#/components/responses/403Error'
+        404:
+          $ref: '#/components/responses/404Error'
+        405:
+          $ref: '#/components/responses/405Error'
+        406:
+          $ref: '#/components/responses/406Error'
+        429:
+          $ref: '#/components/responses/429Error'
+        500:
+          $ref: '#/components/responses/500Error'
+      security:
+      - TPPOAuth2Security:
+        - payments
+  /file-payments/{FilePaymentId}/payment-details:
+    get:
+      tags:
+      - Payment Details
+      summary: Get Payment Details
+      operationId: GetFilePaymentsFilePaymentIdPaymentDetails
+      parameters:
+      - $ref: '#/components/parameters/FilePaymentId'
+      - $ref: '#/components/parameters/x-fapi-auth-date'
+      - $ref: '#/components/parameters/x-fapi-customer-ip-address'
+      - $ref: '#/components/parameters/x-fapi-interaction-id'
+      - $ref: '#/components/parameters/Authorization'
+      - $ref: '#/components/parameters/x-customer-user-agent'
+      responses:
+        200:
+          $ref: '#/components/responses/200FilePaymentsFilePaymentIdPaymentDetailsRead'
+        400:
+          $ref: '#/components/responses/400Error'
+        401:
+          $ref: '#/components/responses/401Error'
+        403:
+          $ref: '#/components/responses/403Error'
+        404:
+          $ref: '#/components/responses/404Error'
+        405:
+          $ref: '#/components/responses/405Error'
+        406:
+          $ref: '#/components/responses/406Error'
+        429:
+          $ref: '#/components/responses/429Error'
+        500:
+          $ref: '#/components/responses/500Error'
+      security:
+      - TPPOAuth2Security:
+        - payments
+  /international-payments/{InternationalPaymentId}/payment-details:
+    get:
+      tags:
+      - Payment Details
+      summary: Get Payment Details
+      operationId: GetInternationalPaymentsInternationalPaymentIdPaymentDetails
+      parameters:
+      - $ref: '#/components/parameters/InternationalPaymentId'
+      - $ref: '#/components/parameters/x-fapi-auth-date'
+      - $ref: '#/components/parameters/x-fapi-customer-ip-address'
+      - $ref: '#/components/parameters/x-fapi-interaction-id'
+      - $ref: '#/components/parameters/Authorization'
+      - $ref: '#/components/parameters/x-customer-user-agent'
+      responses:
+        200:
+          $ref: '#/components/responses/200InternationalPaymentsInternationalPaymentIdPaymentDetailsRead'
+        400:
+          $ref: '#/components/responses/400Error'
+        401:
+          $ref: '#/components/responses/401Error'
+        403:
+          $ref: '#/components/responses/403Error'
+        404:
+          $ref: '#/components/responses/404Error'
+        405:
+          $ref: '#/components/responses/405Error'
+        406:
+          $ref: '#/components/responses/406Error'
+        429:
+          $ref: '#/components/responses/429Error'
+        500:
+          $ref: '#/components/responses/500Error'
+      security:
+      - TPPOAuth2Security:
+        - payments
+  /international-scheduled-payments/{InternationalScheduledPaymentId}/payment-details:
+    get:
+      tags:
+      - Payment Details
+      summary: Get Payment Details
+      operationId: GetInternationalScheduledPaymentsInternationalScheduledPaymentIdPaymentDetails
+      parameters:
+      - $ref: '#/components/parameters/InternationalScheduledPaymentId'
+      - $ref: '#/components/parameters/x-fapi-auth-date'
+      - $ref: '#/components/parameters/x-fapi-customer-ip-address'
+      - $ref: '#/components/parameters/x-fapi-interaction-id'
+      - $ref: '#/components/parameters/Authorization'
+      - $ref: '#/components/parameters/x-customer-user-agent'
+      responses:
+        200:
+          $ref: '#/components/responses/200InternationalScheduledPaymentsInternationalScheduledPaymentIdPaymentDetailsRead'
+        400:
+          $ref: '#/components/responses/400Error'
+        401:
+          $ref: '#/components/responses/401Error'
+        403:
+          $ref: '#/components/responses/403Error'
+        404:
+          $ref: '#/components/responses/404Error'
+        405:
+          $ref: '#/components/responses/405Error'
+        406:
+          $ref: '#/components/responses/406Error'
+        429:
+          $ref: '#/components/responses/429Error'
+        500:
+          $ref: '#/components/responses/500Error'
+      security:
+      - TPPOAuth2Security:
+        - payments
+  /international-standing-orders/{InternationalStandingOrderPaymentId}/payment-details:
+    get:
+      tags:
+      - Payment Details
+      summary: Get Payment Details
+      operationId: GetInternationalStandingOrdersInternationalStandingOrderPaymentIdPaymentDetails
+      parameters:
+      - $ref: '#/components/parameters/InternationalStandingOrderPaymentId'
+      - $ref: '#/components/parameters/x-fapi-auth-date'
+      - $ref: '#/components/parameters/x-fapi-customer-ip-address'
+      - $ref: '#/components/parameters/x-fapi-interaction-id'
+      - $ref: '#/components/parameters/Authorization'
+      - $ref: '#/components/parameters/x-customer-user-agent'
+      responses:
+        200:
+          $ref: '#/components/responses/200InternationalStandingOrdersInternationalStandingOrderPaymentIdPaymentDetailsRead'
+        400:
+          $ref: '#/components/responses/400Error'
+        401:
+          $ref: '#/components/responses/401Error'
+        403:
+          $ref: '#/components/responses/403Error'
+        404:
+          $ref: '#/components/responses/404Error'
+        405:
+          $ref: '#/components/responses/405Error'
+        406:
+          $ref: '#/components/responses/406Error'
+        429:
+          $ref: '#/components/responses/429Error'
+        500:
+          $ref: '#/components/responses/500Error'
+      security:
+      - TPPOAuth2Security:
+        - payments
+components:
+  responses:
+    403Error:
+      description: Forbidden
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+        x-jws-signature:
+          description: 'Header containing a detached JWS signature of the body of the payload.
+
+            '
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+    200DomesticScheduledPaymentsDomesticScheduledPaymentIdPaymentDetailsRead:
+      description: Payment Details Read
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+        x-jws-signature:
+          description: 'Header containing a detached JWS signature of the body of the payload.
+
+            '
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+    500Error:
+      description: Internal Server Error
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+        x-jws-signature:
+          description: 'Header containing a detached JWS signature of the body of the payload.
+
+            '
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+    406Error:
+      description: Not Acceptable
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    200InternationalStandingOrdersInternationalStandingOrderPaymentIdPaymentDetailsRead:
+      description: Payment Details Read
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+        x-jws-signature:
+          description: 'Header containing a detached JWS signature of the body of the payload.
+
+            '
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+    405Error:
+      description: Method Not Allowed
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    200FilePaymentsFilePaymentIdPaymentDetailsRead:
+      description: Payment Details Read
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+        x-jws-signature:
+          description: 'Header containing a detached JWS signature of the body of the payload.
+
+            '
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+    200DomesticPaymentsDomesticPaymentIdPaymentDetailsRead:
+      description: Payment Details Read
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+        x-jws-signature:
+          description: 'Header containing a detached JWS signature of the body of the payload.
+
+            '
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+    429Error:
+      description: Too Many Requests
+      headers:
+        Retry-After:
+          description: Number in seconds to wait
+          schema:
+            type: integer
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    401Error:
+      description: Unauthorized
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    200DomesticStandingOrdersDomesticStandingOrderIdPaymentDetailsRead:
+      description: Payment Details Read
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+        x-jws-signature:
+          description: 'Header containing a detached JWS signature of the body of the payload.
+
+            '
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+    200InternationalPaymentsInternationalPaymentIdPaymentDetailsRead:
+      description: Payment Details Read
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+        x-jws-signature:
+          description: 'Header containing a detached JWS signature of the body of the payload.
+
+            '
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+    200InternationalScheduledPaymentsInternationalScheduledPaymentIdPaymentDetailsRead:
+      description: Payment Details Read
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+        x-jws-signature:
+          description: 'Header containing a detached JWS signature of the body of the payload.
+
+            '
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+    404Error:
+      description: Not found
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    400Error:
+      description: Bad request
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+        x-jws-signature:
+          description: 'Header containing a detached JWS signature of the body of the payload.
+
+            '
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+  parameters:
+    InternationalPaymentId:
+      name: InternationalPaymentId
+      in: path
+      description: InternationalPaymentId
+      required: true
+      schema:
+        type: string
+    Authorization:
+      in: header
+      name: Authorization
+      required: true
+      description: An Authorisation Token as per https://tools.ietf.org/html/rfc6750
+      schema:
+        type: string
+    x-customer-user-agent:
+      in: header
+      name: x-customer-user-agent
+      description: Indicates the user-agent that the PSU is using.
+      required: false
+      schema:
+        type: string
+    FilePaymentId:
+      name: FilePaymentId
+      in: path
+      description: FilePaymentId
+      required: true
+      schema:
+        type: string
+    DomesticStandingOrderId:
+      name: DomesticStandingOrderId
+      in: path
+      description: DomesticStandingOrderId
+      required: true
+      schema:
+        type: string
+    x-fapi-customer-ip-address:
+      in: header
+      name: x-fapi-customer-ip-address
+      required: false
+      description: The PSU's IP address if the PSU is currently logged in with the TPP.
+      schema:
+        type: string
+    InternationalScheduledPaymentId:
+      name: InternationalScheduledPaymentId
+      in: path
+      description: InternationalScheduledPaymentId
+      required: true
+      schema:
+        type: string
+    DomesticPaymentId:
+      name: DomesticPaymentId
+      in: path
+      description: DomesticPaymentId
+      required: true
+      schema:
+        type: string
+    InternationalStandingOrderPaymentId:
+      name: InternationalStandingOrderPaymentId
+      in: path
+      description: InternationalStandingOrderPaymentId
+      required: true
+      schema:
+        type: string
+    x-fapi-auth-date:
+      in: header
+      name: x-fapi-auth-date
+      required: false
+      description: "The time when the PSU last logged in with the TPP. \nAll dates in the HTTP headers are represented as RFC 7231 Full Dates. An example is below: \nSun, 10 Sep 2017 19:43:31 UTC"
+      schema:
+        type: string
+        pattern: ^(Mon|Tue|Wed|Thu|Fri|Sat|Sun), \d{2} (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4} \d{2}:\d{2}:\d{2} (GMT|UTC)$
+    DomesticScheduledPaymentId:
+      name: DomesticScheduledPaymentId
+      in: path
+      description: DomesticScheduledPaymentId
+      required: true
+      schema:
+        type: string
+    x-fapi-interaction-id:
+      in: header
+      name: x-fapi-interaction-id
+      required: false
+      description: An RFC4122 UID used as a correlation id.
+      schema:
+        type: string
+  schemas:
+    Meta:
+      title: MetaData
+      type: object
+      additionalProperties: false
+      description: Meta Data relevant to the payload
+      properties:
+        TotalPages:
+          type: integer
+          format: int32
+        FirstAvailableDateTime:
+          $ref: '#/components/schemas/ISODateTime'
+        LastAvailableDateTime:
+          $ref: '#/components/schemas/ISODateTime'
+    OBError1:
+      type: object
+      additionalProperties: false
+      properties:
+        ErrorCode:
+          description: Low level textual error code, e.g., UK.OBIE.Field.Missing
+          type: string
+          x-namespaced-enum:
+          - UK.OBIE.Field.Expected
+          - UK.OBIE.Field.Invalid
+          - UK.OBIE.Field.InvalidDate
+          - UK.OBIE.Field.Missing
+          - UK.OBIE.Field.Unexpected
+          - UK.OBIE.Header.Invalid
+          - UK.OBIE.Header.Missing
+          - UK.OBIE.Reauthenticate
+          - UK.OBIE.Resource.ConsentMismatch
+          - UK.OBIE.Resource.InvalidConsentStatus
+          - UK.OBIE.Resource.InvalidFormat
+          - UK.OBIE.Resource.NotFound
+          - UK.OBIE.Rules.AfterCutOffDateTime
+          - UK.OBIE.Rules.DuplicateReference
+          - UK.OBIE.Signature.Invalid
+          - UK.OBIE.Signature.InvalidClaim
+          - UK.OBIE.Signature.Malformed
+          - UK.OBIE.Signature.Missing
+          - UK.OBIE.Signature.MissingClaim
+          - UK.OBIE.Signature.Unexpected
+          - UK.OBIE.UnexpectedError
+          - UK.OBIE.Unsupported.AccountIdentifier
+          - UK.OBIE.Unsupported.AccountSecondaryIdentifier
+          - UK.OBIE.Unsupported.Currency
+          - UK.OBIE.Unsupported.Frequency
+          - UK.OBIE.Unsupported.LocalInstrument
+          - UK.OBIE.Unsupported.Scheme
+        Message:
+          description: 'A description of the error that occurred. e.g., ''A mandatory field isn''t supplied'' or ''RequestedExecutionDateTime must be in future''
+
+            OBIE doesn''t standardise this field'
+          type: string
+          minLength: 1
+          maxLength: 500
+        Path:
+          description: Recommended but optional reference to the JSON Path of the field with error, e.g., Data.Initiation.InstructedAmount.Currency
+          type: string
+          minLength: 1
+          maxLength: 500
+        Url:
+          description: URL to help remediate the problem, or provide more information, or to API Reference, or help etc
+          type: string
+      required:
+      - ErrorCode
+      - Message
+      minProperties: 1
+    OBErrorResponse1:
+      description: An array of detail error codes, and messages, and URLs to documentation to help remediation.
+      type: object
+      additionalProperties: false
+      properties:
+        Code:
+          description: High level textual error code, to help categorize the errors.
+          type: string
+          minLength: 1
+          maxLength: 40
+        Id:
+          description: A unique reference for the error instance, for audit purposes, in case of unknown/unclassified errors.
+          type: string
+          minLength: 1
+          maxLength: 40
+        Message:
+          description: Brief Error message, e.g., 'There is something wrong with the request parameters provided'
+          type: string
+          minLength: 1
+          maxLength: 500
+        Errors:
+          items:
+            $ref: '#/components/schemas/OBError1'
+          type: array
+          minItems: 1
+      required:
+      - Code
+      - Message
+      - Errors
+    Links:
+      type: object
+      additionalProperties: false
+      description: Links relevant to the payload
+      properties:
+        Self:
+          type: string
+          format: uri
+        First:
+          type: string
+          format: uri
+        Prev:
+          type: string
+          format: uri
+        Next:
+          type: string
+          format: uri
+        Last:
+          type: string
+          format: uri
+      required:
+      - Self
+    ISODateTime:
+      description: "All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
+      type: string
+      format: date-time
+    OBExternalLocalInstrument1Code:
+      description: 'User community specific instrument.
+
+        Usage: This element is used to specify a local instrument, local clearing option and/or further qualify the service or service level.'
+      type: string
+      x-namespaced-enum:
+      - UK.OBIE.BACS
+      - UK.OBIE.BalanceTransfer
+      - UK.OBIE.CHAPS
+      - UK.OBIE.Euro1
+      - UK.OBIE.FPS
+      - UK.OBIE.Link
+      - UK.OBIE.MoneyTransfer
+      - UK.OBIE.Paym
+      - UK.OBIE.SEPACreditTransfer
+      - UK.OBIE.SEPAInstantCreditTransfer
+      - UK.OBIE.SWIFT
+      - UK.OBIE.Target2
+    OBWritePaymentDetailsResponse1:
+      type: object
+      additionalProperties: false
+      required:
+      - Data
+      properties:
+        Data:
+          type: object
+          additionalProperties: false
+          properties:
+            PaymentStatus:
+              type: array
+              items:
+                type: object
+                additionalProperties: false
+                description: Payment status details.
+                required:
+                - PaymentTransactionId
+                - Status
+                - StatusUpdateDateTime
+                properties:
+                  PaymentTransactionId:
+                    description: Unique identifier for the transaction within an servicing institution. This identifier is both unique and immutable.
+                    type: string
+                    minLength: 1
+                    maxLength: 210
+                  Status:
+                    description: Status of a transfe, as assigned by the transaction administrator.
+                    type: string
+                    enum:
+                    - Accepted
+                    - AcceptedCancellationRequest
+                    - AcceptedCreditSettlementCompleted
+                    - AcceptedCustomerProfile
+                    - AcceptedFundsChecked
+                    - AcceptedSettlementCompleted
+                    - AcceptedSettlementInProcess
+                    - AcceptedTechnicalValidation
+                    - AcceptedWithChange
+                    - AcceptedWithoutPosting
+                    - Cancelled
+                    - NoCancellationProcess
+                    - PartiallyAcceptedCancellationRequest
+                    - PartiallyAcceptedTechnicalCorrect
+                    - PaymentCancelled
+                    - Pending
+                    - PendingCancellationRequest
+                    - Received
+                    - Rejected
+                    - RejectedCancellationRequest
+                  StatusUpdateDateTime:
+                    description: "Date and time at which the status was assigned to the transfer.All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
+                    type: string
+                    format: date-time
+                  StatusDetail:
+                    type: object
+                    additionalProperties: false
+                    required:
+                    - Status
+                    description: Payment status details as per underlying Payment Rail.
+                    properties:
+                      LocalInstrument:
+                        $ref: '#/components/schemas/OBExternalLocalInstrument1Code'
+                      Status:
+                        description: Status of a transfer, as assigned by the transaction administrator.
+                        type: string
+                        minLength: 1
+                        maxLength: 128
+                      StatusReason:
+                        description: Reason Code provided for the status of a transfer.
+                        type: string
+                        enum:
+                        - Cancelled
+                        - PendingFailingSettlement
+                        - PendingSettlement
+                        - Proprietary
+                        - ProprietaryRejection
+                        - Suspended
+                        - Unmatched
+                      StatusReasonDescription:
+                        description: Reason provided for the status of a transfer.
+                        type: string
+                        minLength: 1
+                        maxLength: 256
+        Links:
+          $ref: '#/components/schemas/Links'
+        Meta:
+          $ref: '#/components/schemas/Meta'
+  securitySchemes:
+    TPPOAuth2Security:
+      type: oauth2
+      description: TPP client credential authorisation flow with the ASPSP
+      flows:
+        clientCredentials:
+          tokenUrl: https://authserver.example/token
+          scopes:
+            payments: Generic payment scope
+    PSUOAuth2Security:
+      type: oauth2
+      description: OAuth flow, it is required when the PSU needs to perform SCA with the ASPSP when a TPP wants to access an ASPSP resource owned by the PSU
+      flows:
+        authorizationCode:
+          authorizationUrl: https://authserver.example/authorization
+          tokenUrl: https://authserver.example/token
+          scopes:
+            payments: Generic payment scope

@@ -1,0 +1,687 @@
+openapi: 3.2.0
+info:
+  title: Account and Transaction API Specification Parties API
+  description: Swagger for Account and Transaction API Specification
+  termsOfService: https://www.openbanking.org.uk/terms
+  contact:
+    name: Service Desk
+    email: ServiceDesk@openbanking.org.uk
+  license:
+    name: open-licence
+    url: https://www.openbanking.org.uk/open-licence
+  version: 3.1.10
+servers:
+- url: /open-banking/v3.1/aisp
+tags:
+- name: Parties
+paths:
+  /accounts/{AccountId}/parties:
+    get:
+      tags:
+      - Parties
+      summary: Get Parties
+      operationId: GetAccountsAccountIdParties
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - $ref: '#/components/parameters/x-fapi-auth-date'
+      - $ref: '#/components/parameters/x-fapi-customer-ip-address'
+      - $ref: '#/components/parameters/x-fapi-interaction-id'
+      - $ref: '#/components/parameters/Authorization'
+      - $ref: '#/components/parameters/x-customer-user-agent'
+      responses:
+        200:
+          $ref: '#/components/responses/200AccountsAccountIdPartiesRead'
+        400:
+          $ref: '#/components/responses/400Error'
+        401:
+          $ref: '#/components/responses/401Error'
+        403:
+          $ref: '#/components/responses/403Error'
+        404:
+          $ref: '#/components/responses/404Error'
+        405:
+          $ref: '#/components/responses/405Error'
+        406:
+          $ref: '#/components/responses/406Error'
+        429:
+          $ref: '#/components/responses/429Error'
+        500:
+          $ref: '#/components/responses/500Error'
+      security:
+      - PSUOAuth2Security:
+        - accounts
+  /accounts/{AccountId}/party:
+    get:
+      tags:
+      - Parties
+      summary: Get Parties
+      operationId: GetAccountsAccountIdParty
+      parameters:
+      - $ref: '#/components/parameters/AccountId'
+      - $ref: '#/components/parameters/x-fapi-auth-date'
+      - $ref: '#/components/parameters/x-fapi-customer-ip-address'
+      - $ref: '#/components/parameters/x-fapi-interaction-id'
+      - $ref: '#/components/parameters/Authorization'
+      - $ref: '#/components/parameters/x-customer-user-agent'
+      responses:
+        200:
+          $ref: '#/components/responses/200AccountsAccountIdPartyRead'
+        400:
+          $ref: '#/components/responses/400Error'
+        401:
+          $ref: '#/components/responses/401Error'
+        403:
+          $ref: '#/components/responses/403Error'
+        404:
+          $ref: '#/components/responses/404Error'
+        405:
+          $ref: '#/components/responses/405Error'
+        406:
+          $ref: '#/components/responses/406Error'
+        429:
+          $ref: '#/components/responses/429Error'
+        500:
+          $ref: '#/components/responses/500Error'
+      security:
+      - PSUOAuth2Security:
+        - accounts
+  /party:
+    get:
+      tags:
+      - Parties
+      summary: Get Parties
+      operationId: GetParty
+      parameters:
+      - $ref: '#/components/parameters/x-fapi-auth-date'
+      - $ref: '#/components/parameters/x-fapi-customer-ip-address'
+      - $ref: '#/components/parameters/x-fapi-interaction-id'
+      - $ref: '#/components/parameters/Authorization'
+      - $ref: '#/components/parameters/x-customer-user-agent'
+      responses:
+        200:
+          $ref: '#/components/responses/200PartyRead'
+        400:
+          $ref: '#/components/responses/400Error'
+        401:
+          $ref: '#/components/responses/401Error'
+        403:
+          $ref: '#/components/responses/403Error'
+        404:
+          $ref: '#/components/responses/404Error'
+        405:
+          $ref: '#/components/responses/405Error'
+        406:
+          $ref: '#/components/responses/406Error'
+        429:
+          $ref: '#/components/responses/429Error'
+        500:
+          $ref: '#/components/responses/500Error'
+      security:
+      - PSUOAuth2Security:
+        - accounts
+components:
+  responses:
+    200AccountsAccountIdPartiesRead:
+      description: Parties Read
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBReadParty3'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBReadParty3'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBReadParty3'
+    403Error:
+      description: Forbidden
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+    500Error:
+      description: Internal Server Error
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+    406Error:
+      description: Not Acceptable
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    200PartyRead:
+      description: Parties Read
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBReadParty2'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBReadParty2'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBReadParty2'
+    200AccountsAccountIdPartyRead:
+      description: Parties Read
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBReadParty2'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBReadParty2'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBReadParty2'
+    405Error:
+      description: Method Not Allowed
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    429Error:
+      description: Too Many Requests
+      headers:
+        Retry-After:
+          description: Number in seconds to wait
+          schema:
+            type: integer
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          schema:
+            type: string
+    401Error:
+      description: Unauthorized
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    404Error:
+      description: Not found
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    400Error:
+      description: Bad request
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+  parameters:
+    Authorization:
+      in: header
+      name: Authorization
+      required: true
+      description: An Authorisation Token as per https://tools.ietf.org/html/rfc6750
+      schema:
+        type: string
+    x-customer-user-agent:
+      in: header
+      name: x-customer-user-agent
+      description: Indicates the user-agent that the PSU is using.
+      required: false
+      schema:
+        type: string
+    AccountId:
+      name: AccountId
+      in: path
+      description: AccountId
+      required: true
+      schema:
+        type: string
+    x-fapi-customer-ip-address:
+      in: header
+      name: x-fapi-customer-ip-address
+      required: false
+      description: The PSU's IP address if the PSU is currently logged in with the TPP.
+      schema:
+        type: string
+    x-fapi-auth-date:
+      in: header
+      name: x-fapi-auth-date
+      required: false
+      description: "The time when the PSU last logged in with the TPP. \nAll dates in the HTTP headers are represented as RFC 7231 Full Dates. An example is below: \nSun, 10 Sep 2017 19:43:31 UTC"
+      schema:
+        type: string
+        pattern: ^(Mon|Tue|Wed|Thu|Fri|Sat|Sun), \d{2} (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4} \d{2}:\d{2}:\d{2} (GMT|UTC)$
+    x-fapi-interaction-id:
+      in: header
+      name: x-fapi-interaction-id
+      required: false
+      description: An RFC4122 UID used as a correlation id.
+      schema:
+        type: string
+  schemas:
+    PartyNumber:
+      description: Number assigned by an agent to identify its customer.
+      type: string
+      minLength: 1
+      maxLength: 35
+    PostCode:
+      description: Identifier consisting of a group of letters and/or numbers that is added to a postal address to assist the sorting of mail.
+      type: string
+      minLength: 1
+      maxLength: 16
+    StreetName:
+      description: Name of a street or thoroughfare.
+      type: string
+      minLength: 1
+      maxLength: 70
+    Name_3:
+      description: Name by which a party is known and which is usually used to identify that party.
+      type: string
+      minLength: 1
+      maxLength: 350
+    Meta:
+      title: MetaData
+      type: object
+      description: Meta Data relevant to the payload
+      properties:
+        TotalPages:
+          type: integer
+          format: int32
+        FirstAvailableDateTime:
+          $ref: '#/components/schemas/ISODateTime'
+        LastAvailableDateTime:
+          $ref: '#/components/schemas/ISODateTime'
+      additionalProperties: false
+    PartyId:
+      description: A unique and immutable identifier used to identify the customer resource. This identifier has no meaning to the account owner.
+      type: string
+      minLength: 1
+      maxLength: 40
+    OBReadParty2:
+      type: object
+      required:
+      - Data
+      properties:
+        Data:
+          type: object
+          properties:
+            Party:
+              $ref: '#/components/schemas/OBParty2'
+        Links:
+          $ref: '#/components/schemas/Links'
+        Meta:
+          $ref: '#/components/schemas/Meta'
+      additionalProperties: false
+    OBError1:
+      type: object
+      properties:
+        ErrorCode:
+          description: Low level textual error code, e.g., UK.OBIE.Field.Missing
+          type: string
+          x-namespaced-enum:
+          - UK.OBIE.Field.Expected
+          - UK.OBIE.Field.Invalid
+          - UK.OBIE.Field.InvalidDate
+          - UK.OBIE.Field.Missing
+          - UK.OBIE.Field.Unexpected
+          - UK.OBIE.Header.Invalid
+          - UK.OBIE.Header.Missing
+          - UK.OBIE.Reauthenticate
+          - UK.OBIE.Resource.ConsentMismatch
+          - UK.OBIE.Resource.InvalidConsentStatus
+          - UK.OBIE.Resource.InvalidFormat
+          - UK.OBIE.Resource.NotFound
+          - UK.OBIE.Rules.AfterCutOffDateTime
+          - UK.OBIE.Rules.DuplicateReference
+          - UK.OBIE.Signature.Invalid
+          - UK.OBIE.Signature.InvalidClaim
+          - UK.OBIE.Signature.Malformed
+          - UK.OBIE.Signature.Missing
+          - UK.OBIE.Signature.MissingClaim
+          - UK.OBIE.Signature.Unexpected
+          - UK.OBIE.UnexpectedError
+          - UK.OBIE.Unsupported.AccountIdentifier
+          - UK.OBIE.Unsupported.AccountSecondaryIdentifier
+          - UK.OBIE.Unsupported.Currency
+          - UK.OBIE.Unsupported.Frequency
+          - UK.OBIE.Unsupported.LocalInstrument
+          - UK.OBIE.Unsupported.Scheme
+        Message:
+          description: 'A description of the error that occurred. e.g., ''A mandatory field isn''t supplied'' or ''RequestedExecutionDateTime must be in future''
+
+            OBIE doesn''t standardise this field'
+          type: string
+          minLength: 1
+          maxLength: 500
+        Path:
+          description: Recommended but optional reference to the JSON Path of the field with error, e.g., Data.Initiation.InstructedAmount.Currency
+          type: string
+          minLength: 1
+          maxLength: 500
+        Url:
+          description: URL to help remediate the problem, or provide more information, or to API Reference, or help etc
+          type: string
+      required:
+      - ErrorCode
+      - Message
+      additionalProperties: false
+      minProperties: 1
+    FullLegalName:
+      description: Specifies a character string with a maximum length of 350 characters.
+      type: string
+      minLength: 1
+      maxLength: 350
+    OBExternalPartyType1Code:
+      description: Party type, in a coded form.
+      type: string
+      enum:
+      - Delegate
+      - Joint
+      - Sole
+    OBParty2:
+      type: object
+      required:
+      - PartyId
+      properties:
+        PartyId:
+          $ref: '#/components/schemas/PartyId'
+        PartyNumber:
+          $ref: '#/components/schemas/PartyNumber'
+        PartyType:
+          $ref: '#/components/schemas/OBExternalPartyType1Code'
+        Name:
+          $ref: '#/components/schemas/Name_3'
+        FullLegalName:
+          $ref: '#/components/schemas/FullLegalName'
+        LegalStructure:
+          $ref: '#/components/schemas/OBExternalLegalStructureType1Code'
+        BeneficialOwnership:
+          type: boolean
+        AccountRole:
+          $ref: '#/components/schemas/OBExternalAccountRole1Code'
+        EmailAddress:
+          $ref: '#/components/schemas/EmailAddress'
+        Phone:
+          $ref: '#/components/schemas/PhoneNumber_0'
+        Mobile:
+          $ref: '#/components/schemas/PhoneNumber_1'
+        Relationships:
+          $ref: '#/components/schemas/OBPartyRelationships1'
+        Address:
+          type: array
+          items:
+            type: object
+            description: Postal address of a party.
+            required:
+            - Country
+            properties:
+              AddressType:
+                $ref: '#/components/schemas/OBAddressTypeCode'
+              AddressLine:
+                type: array
+                items:
+                  description: Information that locates and identifies a specific address, as defined by postal services, that is presented in free format text.
+                  type: string
+                  minLength: 1
+                  maxLength: 70
+                minItems: 0
+                maxItems: 5
+              StreetName:
+                $ref: '#/components/schemas/StreetName'
+              BuildingNumber:
+                $ref: '#/components/schemas/BuildingNumber'
+              PostCode:
+                $ref: '#/components/schemas/PostCode'
+              TownName:
+                $ref: '#/components/schemas/TownName'
+              CountrySubDivision:
+                $ref: '#/components/schemas/CountrySubDivision'
+              Country:
+                $ref: '#/components/schemas/CountryCode'
+      additionalProperties: false
+    CountrySubDivision:
+      description: Identifies a subdivision of a country eg, state, region, county.
+      type: string
+      minLength: 1
+      maxLength: 35
+    OBReadParty3:
+      type: object
+      required:
+      - Data
+      properties:
+        Data:
+          type: object
+          properties:
+            Party:
+              type: array
+              items:
+                $ref: '#/components/schemas/OBParty2'
+        Links:
+          $ref: '#/components/schemas/Links'
+        Meta:
+          $ref: '#/components/schemas/Meta'
+      additionalProperties: false
+    OBAddressTypeCode:
+      description: Identifies the nature of the postal address.
+      type: string
+      enum:
+      - Business
+      - Correspondence
+      - DeliveryTo
+      - MailTo
+      - POBox
+      - Postal
+      - Residential
+      - Statement
+    OBErrorResponse1:
+      description: An array of detail error codes, and messages, and URLs to documentation to help remediation.
+      type: object
+      properties:
+        Code:
+          description: High level textual error code, to help categorize the errors.
+          type: string
+          minLength: 1
+          maxLength: 40
+        Id:
+          description: A unique reference for the error instance, for audit purposes, in case of unknown/unclassified errors.
+          type: string
+          minLength: 1
+          maxLength: 40
+        Message:
+          description: Brief Error message, e.g., 'There is something wrong with the request parameters provided'
+          type: string
+          minLength: 1
+          maxLength: 500
+        Errors:
+          items:
+            $ref: '#/components/schemas/OBError1'
+          type: array
+          minItems: 1
+      required:
+      - Code
+      - Message
+      - Errors
+      additionalProperties: false
+    Links:
+      type: object
+      description: Links relevant to the payload
+      properties:
+        Self:
+          type: string
+          format: uri
+        First:
+          type: string
+          format: uri
+        Prev:
+          type: string
+          format: uri
+        Next:
+          type: string
+          format: uri
+        Last:
+          type: string
+          format: uri
+      additionalProperties: false
+      required:
+      - Self
+    ISODateTime:
+      description: "All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
+      type: string
+      format: date-time
+    TownName:
+      description: Name of a built-up area, with defined boundaries, and a local government.
+      type: string
+      minLength: 1
+      maxLength: 35
+    CountryCode:
+      description: Nation with its own government, occupying a particular territory.
+      type: string
+      pattern: ^[A-Z]{2,2}$
+    BuildingNumber:
+      description: Number that identifies the position of a building on a street.
+      type: string
+      minLength: 1
+      maxLength: 16
+    OBExternalAccountRole1Code:
+      description: A party’s role with respect to the related account.
+      type: string
+      x-namespaced-enum:
+      - UK.OBIE.Administrator
+      - UK.OBIE.Beneficiary
+      - UK.OBIE.CustodianForMinor
+      - UK.OBIE.Granter
+      - UK.OBIE.LegalGuardian
+      - UK.OBIE.OtherParty
+      - UK.OBIE.PowerOfAttorney
+      - UK.OBIE.Principal
+      - UK.OBIE.Protector
+      - UK.OBIE.RegisteredShareholderName
+      - UK.OBIE.SecondaryOwner
+      - UK.OBIE.SeniorManagingOfficial
+      - UK.OBIE.Settlor
+      - UK.OBIE.SuccessorOnDeath
+    PhoneNumber_1:
+      description: Collection of information that identifies a mobile phone number, as defined by telecom services.
+      type: string
+      pattern: \+[0-9]{1,3}-[0-9()+\-]{1,30}
+    EmailAddress:
+      description: Address for electronic mail (e-mail).
+      type: string
+      minLength: 1
+      maxLength: 256
+    OBPartyRelationships1:
+      type: object
+      description: The Party's relationships with other resources.
+      properties:
+        Account:
+          type: object
+          required:
+          - Related
+          - Id
+          description: Relationship to the Account resource.
+          properties:
+            Related:
+              description: Absolute URI to the related resource.
+              type: string
+              format: uri
+            Id:
+              description: Unique identification as assigned by the ASPSP to uniquely identify the related resource.
+              type: string
+              minLength: 1
+              maxLength: 40
+    PhoneNumber_0:
+      description: Collection of information that identifies a phone number, as defined by telecom services.
+      type: string
+      pattern: \+[0-9]{1,3}-[0-9()+\-]{1,30}
+    OBExternalLegalStructureType1Code:
+      description: Legal standing of the party.
+      type: string
+      x-namespaced-enum:
+      - UK.OBIE.CIC
+      - UK.OBIE.CIO
+      - UK.OBIE.Charity
+      - UK.OBIE.CoOp
+      - UK.OBIE.GeneralPartnership
+      - UK.OBIE.Individual
+      - UK.OBIE.LimitedLiabilityPartnership
+      - UK.OBIE.LimitedPartnership
+      - UK.OBIE.PrivateLimitedCompany
+      - UK.OBIE.PublicLimitedCompany
+      - UK.OBIE.ScottishLimitedPartnership
+      - UK.OBIE.Sole
+  securitySchemes:
+    TPPOAuth2Security:
+      type: oauth2
+      description: TPP client credential authorisation flow with the ASPSP
+      flows:
+        clientCredentials:
+          tokenUrl: https://authserver.example/token
+          scopes:
+            accounts: Ability to read Accounts information
+    PSUOAuth2Security:
+      type: oauth2
+      description: OAuth flow, it is required when the PSU needs to perform SCA with the ASPSP when a TPP wants to access an ASPSP resource owned by the PSU
+      flows:
+        authorizationCode:
+          authorizationUrl: https://authserver.example/authorization
+          tokenUrl: https://authserver.example/token
+          scopes:
+            accounts: Ability to read Accounts information
