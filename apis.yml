@@ -121,6 +121,8 @@ apis:
   description: The Accounts API from Vanquis Banking Group — 2 operation(s) for accounts.
   humanURL: https://www.vanquis.com/developer-portal/
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
@@ -462,6 +464,8 @@ apis:
   description: The Products API from Vanquis Banking Group — 2 operation(s) for products.
   humanURL: https://www.vanquis.com/developer-portal/
   tags:
+  - Product
+  tags_raw:
   - Products
   properties:
   - type: OpenAPI
@@ -551,6 +555,8 @@ apis:
   description: The Transactions API from Vanquis Banking Group — 3 operation(s) for transactions.
   humanURL: https://www.vanquis.com/developer-portal/
   tags:
+  - Transaction
+  tags_raw:
   - Transactions
   properties:
   - type: OpenAPI
