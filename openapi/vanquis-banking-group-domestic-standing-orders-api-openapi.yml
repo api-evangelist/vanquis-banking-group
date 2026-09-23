@@ -188,9 +188,199 @@ paths:
       - TPPOAuth2Security:
         - payments
 components:
+  parameters:
+    x-fapi-interaction-id:
+      in: header
+      name: x-fapi-interaction-id
+      required: false
+      description: An RFC4122 UID used as a correlation id.
+      schema:
+        type: string
+    ConsentId:
+      name: ConsentId
+      in: path
+      description: ConsentId
+      required: true
+      schema:
+        type: string
+    Authorization:
+      in: header
+      name: Authorization
+      required: true
+      description: An Authorisation Token as per https://tools.ietf.org/html/rfc6750
+      schema:
+        type: string
+    x-jws-signature:
+      in: header
+      name: x-jws-signature
+      required: true
+      description: A detached JWS signature of the body of the payload.
+      schema:
+        type: string
+    x-customer-user-agent:
+      in: header
+      name: x-customer-user-agent
+      description: Indicates the user-agent that the PSU is using.
+      required: false
+      schema:
+        type: string
+    DomesticStandingOrderId:
+      name: DomesticStandingOrderId
+      in: path
+      description: DomesticStandingOrderId
+      required: true
+      schema:
+        type: string
+    x-fapi-auth-date:
+      in: header
+      name: x-fapi-auth-date
+      required: false
+      description: "The time when the PSU last logged in with the TPP. \nAll dates in the HTTP headers are represented as RFC 7231 Full Dates. An example is below: \nSun, 10 Sep 2017 19:43:31 UTC"
+      schema:
+        type: string
+        pattern: ^(Mon|Tue|Wed|Thu|Fri|Sat|Sun), \d{2} (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4} \d{2}:\d{2}:\d{2} (GMT|UTC)$
+    x-idempotency-key:
+      name: x-idempotency-key
+      in: header
+      description: 'Every request will be processed only once per x-idempotency-key.  The
+
+        Idempotency Key will be valid for 24 hours.
+
+        '
+      required: true
+      schema:
+        type: string
+        maxLength: 40
+        pattern: ^(?!\s)(.*)(\S)$
+    x-fapi-customer-ip-address:
+      in: header
+      name: x-fapi-customer-ip-address
+      required: false
+      description: The PSU's IP address if the PSU is currently logged in with the TPP.
+      schema:
+        type: string
   responses:
+    405Error:
+      description: Method Not Allowed
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    415Error:
+      description: Unsupported Media Type
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    201DomesticStandingOrdersCreated:
+      description: Domestic Standing Orders Created
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+        x-jws-signature:
+          description: 'Header containing a detached JWS signature of the body of the payload.
+
+            '
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBWriteDomesticStandingOrderResponse6'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBWriteDomesticStandingOrderResponse6'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBWriteDomesticStandingOrderResponse6'
     403Error:
       description: Forbidden
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+        x-jws-signature:
+          description: 'Header containing a detached JWS signature of the body of the payload.
+
+            '
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+    429Error:
+      description: Too Many Requests
+      headers:
+        Retry-After:
+          description: Number in seconds to wait
+          schema:
+            type: integer
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    401Error:
+      description: Unauthorized
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    406Error:
+      description: Not Acceptable
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    200DomesticStandingOrderConsentsConsentIdRead:
+      description: Domestic Standing Order Consents Read
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+        x-jws-signature:
+          description: 'Header containing a detached JWS signature of the body of the payload.
+
+            '
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBWriteDomesticStandingOrderConsentResponse6'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBWriteDomesticStandingOrderConsentResponse6'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBWriteDomesticStandingOrderConsentResponse6'
+    400Error:
+      description: Bad request
       headers:
         x-fapi-interaction-id:
           description: An RFC4122 UID used as a correlation id.
@@ -239,127 +429,8 @@ components:
         application/jose+jwe:
           schema:
             $ref: '#/components/schemas/OBErrorResponse1'
-    406Error:
-      description: Not Acceptable
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-    200DomesticStandingOrdersDomesticStandingOrderIdRead:
-      description: Domestic Standing Orders Read
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-        x-jws-signature:
-          description: 'Header containing a detached JWS signature of the body of the payload.
-
-            '
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBWriteDomesticStandingOrderResponse6'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBWriteDomesticStandingOrderResponse6'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBWriteDomesticStandingOrderResponse6'
-    405Error:
-      description: Method Not Allowed
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-    429Error:
-      description: Too Many Requests
-      headers:
-        Retry-After:
-          description: Number in seconds to wait
-          schema:
-            type: integer
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-    415Error:
-      description: Unsupported Media Type
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-    201DomesticStandingOrdersCreated:
-      description: Domestic Standing Orders Created
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-        x-jws-signature:
-          description: 'Header containing a detached JWS signature of the body of the payload.
-
-            '
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBWriteDomesticStandingOrderResponse6'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBWriteDomesticStandingOrderResponse6'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBWriteDomesticStandingOrderResponse6'
-    401Error:
-      description: Unauthorized
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
     201DomesticStandingOrderConsentsCreated:
       description: Domestic Standing Order Consents Created
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-        x-jws-signature:
-          description: 'Header containing a detached JWS signature of the body of the payload.
-
-            '
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBWriteDomesticStandingOrderConsentResponse6'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBWriteDomesticStandingOrderConsentResponse6'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBWriteDomesticStandingOrderConsentResponse6'
-    200DomesticStandingOrderConsentsConsentIdRead:
-      description: Domestic Standing Order Consents Read
       headers:
         x-fapi-interaction-id:
           description: An RFC4122 UID used as a correlation id.
@@ -391,8 +462,8 @@ components:
           required: true
           schema:
             type: string
-    400Error:
-      description: Bad request
+    200DomesticStandingOrdersDomesticStandingOrderIdRead:
+      description: Domestic Standing Orders Read
       headers:
         x-fapi-interaction-id:
           description: An RFC4122 UID used as a correlation id.
@@ -409,85 +480,60 @@ components:
       content:
         application/json; charset=utf-8:
           schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
+            $ref: '#/components/schemas/OBWriteDomesticStandingOrderResponse6'
         application/json:
           schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
+            $ref: '#/components/schemas/OBWriteDomesticStandingOrderResponse6'
         application/jose+jwe:
           schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-  parameters:
-    Authorization:
-      in: header
-      name: Authorization
-      required: true
-      description: An Authorisation Token as per https://tools.ietf.org/html/rfc6750
-      schema:
-        type: string
-    x-customer-user-agent:
-      in: header
-      name: x-customer-user-agent
-      description: Indicates the user-agent that the PSU is using.
-      required: false
-      schema:
-        type: string
-    ConsentId:
-      name: ConsentId
-      in: path
-      description: ConsentId
-      required: true
-      schema:
-        type: string
-    DomesticStandingOrderId:
-      name: DomesticStandingOrderId
-      in: path
-      description: DomesticStandingOrderId
-      required: true
-      schema:
-        type: string
-    x-fapi-customer-ip-address:
-      in: header
-      name: x-fapi-customer-ip-address
-      required: false
-      description: The PSU's IP address if the PSU is currently logged in with the TPP.
-      schema:
-        type: string
-    x-jws-signature:
-      in: header
-      name: x-jws-signature
-      required: true
-      description: A detached JWS signature of the body of the payload.
-      schema:
-        type: string
-    x-idempotency-key:
-      name: x-idempotency-key
-      in: header
-      description: 'Every request will be processed only once per x-idempotency-key.  The
-
-        Idempotency Key will be valid for 24 hours.
-
-        '
-      required: true
-      schema:
-        type: string
-        maxLength: 40
-        pattern: ^(?!\s)(.*)(\S)$
-    x-fapi-auth-date:
-      in: header
-      name: x-fapi-auth-date
-      required: false
-      description: "The time when the PSU last logged in with the TPP. \nAll dates in the HTTP headers are represented as RFC 7231 Full Dates. An example is below: \nSun, 10 Sep 2017 19:43:31 UTC"
-      schema:
-        type: string
-        pattern: ^(Mon|Tue|Wed|Thu|Fri|Sat|Sun), \d{2} (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4} \d{2}:\d{2}:\d{2} (GMT|UTC)$
-    x-fapi-interaction-id:
-      in: header
-      name: x-fapi-interaction-id
-      required: false
-      description: An RFC4122 UID used as a correlation id.
-      schema:
-        type: string
+            $ref: '#/components/schemas/OBWriteDomesticStandingOrderResponse6'
   schemas:
+    ActiveOrHistoricCurrencyCode:
+      description: A code allocated to a currency by a Maintenance Agency under an international identification scheme, as described in the latest edition of the international standard ISO 4217 "Codes for the representation of currencies and funds".
+      type: string
+      pattern: ^[A-Z]{3,3}$
+    OBChargeBearerType1Code:
+      description: Specifies which party/parties will bear the charges associated with the processing of the payment transaction.
+      type: string
+      enum:
+      - BorneByCreditor
+      - BorneByDebtor
+      - FollowingServiceLevel
+      - Shared
+    OBExternalPaymentChargeType1Code:
+      description: Charge type, in a coded form.
+      type: string
+      x-namespaced-enum:
+      - UK.OBIE.CHAPSOut
+    OBErrorResponse1:
+      description: An array of detail error codes, and messages, and URLs to documentation to help remediation.
+      type: object
+      additionalProperties: false
+      properties:
+        Code:
+          description: High level textual error code, to help categorize the errors.
+          type: string
+          minLength: 1
+          maxLength: 40
+        Id:
+          description: A unique reference for the error instance, for audit purposes, in case of unknown/unclassified errors.
+          type: string
+          minLength: 1
+          maxLength: 40
+        Message:
+          description: Brief Error message, e.g., 'There is something wrong with the request parameters provided'
+          type: string
+          minLength: 1
+          maxLength: 500
+        Errors:
+          items:
+            $ref: '#/components/schemas/OBError1'
+          type: array
+          minItems: 1
+      required:
+      - Code
+      - Message
+      - Errors
     OBSCASupportData1:
       type: object
       properties:
@@ -517,201 +563,51 @@ components:
           minLength: 1
           description: 'If the payment is recurring, then this field is populated with the transaction identifier of the previous payment occurrence so that the ASPSP can verify that the PISP, amount and the payee are the same as the previous occurrence. The value here refers to the payment id e.g. DomesticPaymentId  '
       description: Supporting Data provided by TPP, when requesting SCA Exemption.
-    OBWriteDomesticStandingOrder3:
+    Links:
       type: object
       additionalProperties: false
-      required:
-      - Data
-      - Risk
+      description: Links relevant to the payload
       properties:
-        Data:
-          type: object
-          additionalProperties: false
-          required:
-          - ConsentId
-          - Initiation
-          properties:
-            ConsentId:
-              description: 'OB: Unique identification as assigned by the ASPSP to uniquely identify the consent resource.'
-              type: string
-              minLength: 1
-              maxLength: 128
-            Initiation:
-              type: object
-              additionalProperties: false
-              required:
-              - Frequency
-              - FirstPaymentDateTime
-              - FirstPaymentAmount
-              - CreditorAccount
-              description: The Initiation payload is sent by the initiating party to the ASPSP. It is used to request movement of funds from the debtor account to a creditor for a domestic standing order.
-              properties:
-                Frequency:
-                  description: "Individual Definitions:\nEvryDay - Every day\nEvryWorkgDay - Every working day\nIntrvlWkDay - An interval specified in weeks (01 to 09), and the day within the week (01 to 07)\nWkInMnthDay - A monthly interval, specifying the week of the month (01 to 05) and day within the week (01 to 07)\nIntrvlMnthDay - An interval specified in months (between 01 to 06, 12, 24), specifying the day within the month (-5 to -1, 1 to 31)\nQtrDay - Quarterly (either ENGLISH, SCOTTISH, or RECEIVED). \nENGLISH = Paid on the 25th March, 24th June, 29th September and 25th December. \nSCOTTISH = Paid on the 2nd February, 15th May, 1st August and 11th November.\nRECEIVED = Paid on the 20th March, 19th June, 24th September and 20th December. \nIndividual Patterns:\nEvryDay (ScheduleCode)\nEvryWorkgDay (ScheduleCode)\nIntrvlWkDay:IntervalInWeeks:DayInWeek (ScheduleCode + IntervalInWeeks + DayInWeek)\nWkInMnthDay:WeekInMonth:DayInWeek (ScheduleCode + WeekInMonth + DayInWeek)\nIntrvlMnthDay:IntervalInMonths:DayInMonth (ScheduleCode + IntervalInMonths + DayInMonth)\nQtrDay: + either (ENGLISH, SCOTTISH or RECEIVED) ScheduleCode + QuarterDay\nThe regular expression for this element combines five smaller versions for each permitted pattern. To aid legibility - the components are presented individually here:\nEvryDay\nEvryWorkgDay\nIntrvlWkDay:0[1-9]:0[1-7]\nWkInMnthDay:0[1-5]:0[1-7]\nIntrvlMnthDay:(0[1-6]|12|24):(-0[1-5]|0[1-9]|[12][0-9]|3[01])\nQtrDay:(ENGLISH|SCOTTISH|RECEIVED)\nFull Regular Expression:\n^(EvryDay)$|^(EvryWorkgDay)$|^(IntrvlWkDay:0[1-9]:0[1-7])$|^(WkInMnthDay:0[1-5]:0[1-7])$|^(IntrvlMnthDay:(0[1-6]|12|24):(-0[1-5]|0[1-9]|[12][0-9]|3[01]))$|^(QtrDay:(ENGLISH|SCOTTISH|RECEIVED))$"
-                  type: string
-                  pattern: ^(EvryDay)$|^(EvryWorkgDay)$|^(IntrvlDay:((0[2-9])|([1-2][0-9])|3[0-1]))$|^(IntrvlWkDay:0[1-9]:0[1-7])$|^(WkInMnthDay:0[1-5]:0[1-7])$|^(IntrvlMnthDay:(0[1-6]|12|24):(-0[1-5]|0[1-9]|[12][0-9]|3[01]))$|^(QtrDay:(ENGLISH|SCOTTISH|RECEIVED))$
-                Reference:
-                  description: 'Unique reference, as assigned by the creditor, to unambiguously refer to the payment transaction.
-
-                    Usage: If available, the initiating party should provide this reference in the structured remittance information, to enable reconciliation by the creditor upon receipt of the amount of money.
-
-                    If the business context requires the use of a creditor reference or a payment remit identification, and only one identifier can be passed through the end-to-end chain, the creditor''s reference or payment remittance identification should be quoted in the end-to-end transaction identification.'
-                  type: string
-                  minLength: 1
-                  maxLength: 35
-                NumberOfPayments:
-                  description: Number of the payments that will be made in completing this frequency sequence including any executed since the sequence start date.
-                  type: string
-                  minLength: 1
-                  maxLength: 35
-                FirstPaymentDateTime:
-                  description: "The date on which the first payment for a Standing Order schedule will be made.All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
-                  type: string
-                  format: date-time
-                RecurringPaymentDateTime:
-                  description: "The date on which the first recurring payment for a Standing Order schedule will be made. \nUsage: This must be populated only if the first recurring date is different to the first payment date.All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
-                  type: string
-                  format: date-time
-                FinalPaymentDateTime:
-                  description: "The date on which the final payment for a Standing Order schedule will be made.All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
-                  type: string
-                  format: date-time
-                FirstPaymentAmount:
-                  type: object
-                  additionalProperties: false
-                  required:
-                  - Amount
-                  - Currency
-                  description: The amount of the first Standing Order
-                  properties:
-                    Amount:
-                      $ref: '#/components/schemas/OBActiveCurrencyAndAmount_SimpleType'
-                    Currency:
-                      $ref: '#/components/schemas/ActiveOrHistoricCurrencyCode'
-                RecurringPaymentAmount:
-                  type: object
-                  additionalProperties: false
-                  required:
-                  - Amount
-                  - Currency
-                  description: The amount of the recurring Standing Order
-                  properties:
-                    Amount:
-                      $ref: '#/components/schemas/OBActiveCurrencyAndAmount_SimpleType'
-                    Currency:
-                      $ref: '#/components/schemas/ActiveOrHistoricCurrencyCode'
-                FinalPaymentAmount:
-                  type: object
-                  additionalProperties: false
-                  required:
-                  - Amount
-                  - Currency
-                  description: The amount of the final Standing Order
-                  properties:
-                    Amount:
-                      $ref: '#/components/schemas/OBActiveCurrencyAndAmount_SimpleType'
-                    Currency:
-                      $ref: '#/components/schemas/ActiveOrHistoricCurrencyCode'
-                DebtorAccount:
-                  type: object
-                  additionalProperties: false
-                  required:
-                  - SchemeName
-                  - Identification
-                  description: Provides the details to identify the debtor account.
-                  properties:
-                    SchemeName:
-                      $ref: '#/components/schemas/OBExternalAccountIdentification4Code'
-                    Identification:
-                      $ref: '#/components/schemas/Identification_0'
-                    Name:
-                      description: 'The account name is the name or names of the account owner(s) represented at an account level, as displayed by the ASPSP''s online channels.
-
-                        Note, the account name is not the product name or the nickname of the account.'
-                      type: string
-                      minLength: 1
-                      maxLength: 350
-                    SecondaryIdentification:
-                      $ref: '#/components/schemas/SecondaryIdentification'
-                CreditorAccount:
-                  type: object
-                  additionalProperties: false
-                  required:
-                  - SchemeName
-                  - Identification
-                  - Name
-                  description: Identification assigned by an institution to identify an account. This identification is known by the account owner.
-                  properties:
-                    SchemeName:
-                      $ref: '#/components/schemas/OBExternalAccountIdentification4Code'
-                    Identification:
-                      $ref: '#/components/schemas/Identification_0'
-                    Name:
-                      description: 'The account name is the name or names of the account owner(s) represented at an account level.
-
-                        Note, the account name is not the product name or the nickname of the account.
-
-                        OB: ASPSPs may carry out name validation for Confirmation of Payee, but it is not mandatory.'
-                      type: string
-                      minLength: 1
-                      maxLength: 350
-                    SecondaryIdentification:
-                      $ref: '#/components/schemas/SecondaryIdentification'
-                SupplementaryData:
-                  $ref: '#/components/schemas/OBSupplementaryData1'
-        Risk:
-          $ref: '#/components/schemas/OBRisk1'
+        Self:
+          type: string
+          format: uri
+        First:
+          type: string
+          format: uri
+        Prev:
+          type: string
+          format: uri
+        Next:
+          type: string
+          format: uri
+        Last:
+          type: string
+          format: uri
+      required:
+      - Self
+    CountryCode:
+      description: Nation with its own government.
+      type: string
+      pattern: ^[A-Z]{2,2}$
     PostCode:
       description: Identifier consisting of a group of letters and/or numbers that is added to a postal address to assist the sorting of mail.
       type: string
       minLength: 1
       maxLength: 16
-    StreetName:
-      description: Name of a street or thoroughfare.
+    BuildingNumber:
+      description: Number that identifies the position of a building on a street.
       type: string
       minLength: 1
-      maxLength: 70
-    Meta:
-      title: MetaData
-      type: object
-      additionalProperties: false
-      description: Meta Data relevant to the payload
-      properties:
-        TotalPages:
-          type: integer
-          format: int32
-        FirstAvailableDateTime:
-          $ref: '#/components/schemas/ISODateTime'
-        LastAvailableDateTime:
-          $ref: '#/components/schemas/ISODateTime'
-    ActiveOrHistoricCurrencyCode:
-      description: A code allocated to a currency by a Maintenance Agency under an international identification scheme, as described in the latest edition of the international standard ISO 4217 "Codes for the representation of currencies and funds".
+      maxLength: 16
+    ISODateTime:
+      description: "All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
       type: string
-      pattern: ^[A-Z]{3,3}$
-    OBCashAccountDebtor4:
-      type: object
-      description: ^ Only incuded in the response if `Data. ReadRefundAccount` is set to `Yes` in the consent.
-      properties:
-        SchemeName:
-          type: string
-          description: ^ Name of the identification scheme, in a coded form as published in an external list. | Namespaced Enumeration OBExternalAccountIdentification4Code
-        Identification:
-          type: string
-          description: ^ Identification assigned by an institution to identify an account. This identification is known by the account owner. | Max256Text
-        Name:
-          type: string
-          description: ^ Name of the account, as assigned by the account servicing institution.  Usage The account name is the name or names of the account owner(s) represented at an account level. The account name is not the product name or the nickname of the account.
-        SecondaryIdentification:
-          type: string
-          description: ^ This is secondary identification of the account, as assigned by the account servicing institution.  This can be used by building societies to additionally identify accounts with a roll number (in addition to a sort code and account number combination) | Max34Text
-    OBChargeBearerType1Code:
-      description: Specifies which party/parties will bear the charges associated with the processing of the payment transaction.
+      format: date-time
+    TownName:
+      description: Name of a built-up area, with defined boundaries, and a local government.
       type: string
-      enum:
-      - BorneByCreditor
-      - BorneByDebtor
-      - FollowingServiceLevel
-      - Shared
+      minLength: 1
+      maxLength: 35
     OBError1:
       type: object
       additionalProperties: false
@@ -766,6 +662,22 @@ components:
       - ErrorCode
       - Message
       minProperties: 1
+    OBCashAccountDebtor4:
+      type: object
+      description: ^ Only incuded in the response if `Data. ReadRefundAccount` is set to `Yes` in the consent.
+      properties:
+        SchemeName:
+          type: string
+          description: ^ Name of the identification scheme, in a coded form as published in an external list. | Namespaced Enumeration OBExternalAccountIdentification4Code
+        Identification:
+          type: string
+          description: ^ Identification assigned by an institution to identify an account. This identification is known by the account owner. | Max256Text
+        Name:
+          type: string
+          description: ^ Name of the account, as assigned by the account servicing institution.  Usage The account name is the name or names of the account owner(s) represented at an account level. The account name is not the product name or the nickname of the account.
+        SecondaryIdentification:
+          type: string
+          description: ^ This is secondary identification of the account, as assigned by the account servicing institution.  This can be used by building societies to additionally identify accounts with a roll number (in addition to a sort code and account number combination) | Max34Text
     OBWriteDomesticStandingOrderResponse6:
       type: object
       additionalProperties: false
@@ -1014,29 +926,6 @@ components:
           $ref: '#/components/schemas/Links'
         Meta:
           $ref: '#/components/schemas/Meta'
-    OBExternalAccountIdentification4Code:
-      description: Name of the identification scheme, in a coded form as published in an external list.
-      type: string
-      x-namespaced-enum:
-      - UK.OBIE.BBAN
-      - UK.OBIE.IBAN
-      - UK.OBIE.PAN
-      - UK.OBIE.Paym
-      - UK.OBIE.SortCodeAccountNumber
-    OBActiveCurrencyAndAmount_SimpleType:
-      description: A number of monetary units specified in an active currency where the unit of currency is explicit and compliant with ISO 4217.
-      type: string
-      pattern: ^\d{1,13}$|^\d{1,13}\.\d{1,5}$
-    SecondaryIdentification:
-      description: "This is secondary identification of the account, as assigned by the account servicing institution. \nThis can be used by building societies to additionally identify accounts with a roll number (in addition to a sort code and account number combination)."
-      type: string
-      minLength: 1
-      maxLength: 34
-    CountrySubDivision:
-      description: Identifies a subdivision of a country such as state, region, county.
-      type: string
-      minLength: 1
-      maxLength: 35
     OBWriteDomesticStandingOrderConsent5:
       type: object
       additionalProperties: false
@@ -1206,71 +1095,217 @@ components:
               $ref: '#/components/schemas/OBSCASupportData1'
         Risk:
           $ref: '#/components/schemas/OBRisk1'
-    Identification_0:
-      description: Identification assigned by an institution to identify an account. This identification is known by the account owner.
+    OBActiveOrHistoricCurrencyAndAmount:
+      type: object
+      additionalProperties: false
+      required:
+      - Amount
+      - Currency
+      description: Amount of money associated with the charge type.
+      properties:
+        Amount:
+          $ref: '#/components/schemas/OBActiveCurrencyAndAmount_SimpleType'
+        Currency:
+          $ref: '#/components/schemas/ActiveOrHistoricCurrencyCode'
+    CountrySubDivision:
+      description: Identifies a subdivision of a country such as state, region, county.
       type: string
       minLength: 1
-      maxLength: 256
-    OBErrorResponse1:
-      description: An array of detail error codes, and messages, and URLs to documentation to help remediation.
+      maxLength: 35
+    Meta:
+      title: MetaData
       type: object
       additionalProperties: false
+      description: Meta Data relevant to the payload
       properties:
-        Code:
-          description: High level textual error code, to help categorize the errors.
-          type: string
-          minLength: 1
-          maxLength: 40
-        Id:
-          description: A unique reference for the error instance, for audit purposes, in case of unknown/unclassified errors.
-          type: string
-          minLength: 1
-          maxLength: 40
-        Message:
-          description: Brief Error message, e.g., 'There is something wrong with the request parameters provided'
-          type: string
-          minLength: 1
-          maxLength: 500
-        Errors:
-          items:
-            $ref: '#/components/schemas/OBError1'
-          type: array
-          minItems: 1
-      required:
-      - Code
-      - Message
-      - Errors
-    Links:
-      type: object
-      additionalProperties: false
-      description: Links relevant to the payload
-      properties:
-        Self:
-          type: string
-          format: uri
-        First:
-          type: string
-          format: uri
-        Prev:
-          type: string
-          format: uri
-        Next:
-          type: string
-          format: uri
-        Last:
-          type: string
-          format: uri
-      required:
-      - Self
-    ISODateTime:
-      description: "All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
-      type: string
-      format: date-time
-    OBExternalPaymentChargeType1Code:
-      description: Charge type, in a coded form.
+        TotalPages:
+          type: integer
+          format: int32
+        FirstAvailableDateTime:
+          $ref: '#/components/schemas/ISODateTime'
+        LastAvailableDateTime:
+          $ref: '#/components/schemas/ISODateTime'
+    OBExternalAccountIdentification4Code:
+      description: Name of the identification scheme, in a coded form as published in an external list.
       type: string
       x-namespaced-enum:
-      - UK.OBIE.CHAPSOut
+      - UK.OBIE.BBAN
+      - UK.OBIE.IBAN
+      - UK.OBIE.PAN
+      - UK.OBIE.Paym
+      - UK.OBIE.SortCodeAccountNumber
+    OBActiveCurrencyAndAmount_SimpleType:
+      description: A number of monetary units specified in an active currency where the unit of currency is explicit and compliant with ISO 4217.
+      type: string
+      pattern: ^\d{1,13}$|^\d{1,13}\.\d{1,5}$
+    OBWriteDomesticStandingOrder3:
+      type: object
+      additionalProperties: false
+      required:
+      - Data
+      - Risk
+      properties:
+        Data:
+          type: object
+          additionalProperties: false
+          required:
+          - ConsentId
+          - Initiation
+          properties:
+            ConsentId:
+              description: 'OB: Unique identification as assigned by the ASPSP to uniquely identify the consent resource.'
+              type: string
+              minLength: 1
+              maxLength: 128
+            Initiation:
+              type: object
+              additionalProperties: false
+              required:
+              - Frequency
+              - FirstPaymentDateTime
+              - FirstPaymentAmount
+              - CreditorAccount
+              description: The Initiation payload is sent by the initiating party to the ASPSP. It is used to request movement of funds from the debtor account to a creditor for a domestic standing order.
+              properties:
+                Frequency:
+                  description: "Individual Definitions:\nEvryDay - Every day\nEvryWorkgDay - Every working day\nIntrvlWkDay - An interval specified in weeks (01 to 09), and the day within the week (01 to 07)\nWkInMnthDay - A monthly interval, specifying the week of the month (01 to 05) and day within the week (01 to 07)\nIntrvlMnthDay - An interval specified in months (between 01 to 06, 12, 24), specifying the day within the month (-5 to -1, 1 to 31)\nQtrDay - Quarterly (either ENGLISH, SCOTTISH, or RECEIVED). \nENGLISH = Paid on the 25th March, 24th June, 29th September and 25th December. \nSCOTTISH = Paid on the 2nd February, 15th May, 1st August and 11th November.\nRECEIVED = Paid on the 20th March, 19th June, 24th September and 20th December. \nIndividual Patterns:\nEvryDay (ScheduleCode)\nEvryWorkgDay (ScheduleCode)\nIntrvlWkDay:IntervalInWeeks:DayInWeek (ScheduleCode + IntervalInWeeks + DayInWeek)\nWkInMnthDay:WeekInMonth:DayInWeek (ScheduleCode + WeekInMonth + DayInWeek)\nIntrvlMnthDay:IntervalInMonths:DayInMonth (ScheduleCode + IntervalInMonths + DayInMonth)\nQtrDay: + either (ENGLISH, SCOTTISH or RECEIVED) ScheduleCode + QuarterDay\nThe regular expression for this element combines five smaller versions for each permitted pattern. To aid legibility - the components are presented individually here:\nEvryDay\nEvryWorkgDay\nIntrvlWkDay:0[1-9]:0[1-7]\nWkInMnthDay:0[1-5]:0[1-7]\nIntrvlMnthDay:(0[1-6]|12|24):(-0[1-5]|0[1-9]|[12][0-9]|3[01])\nQtrDay:(ENGLISH|SCOTTISH|RECEIVED)\nFull Regular Expression:\n^(EvryDay)$|^(EvryWorkgDay)$|^(IntrvlWkDay:0[1-9]:0[1-7])$|^(WkInMnthDay:0[1-5]:0[1-7])$|^(IntrvlMnthDay:(0[1-6]|12|24):(-0[1-5]|0[1-9]|[12][0-9]|3[01]))$|^(QtrDay:(ENGLISH|SCOTTISH|RECEIVED))$"
+                  type: string
+                  pattern: ^(EvryDay)$|^(EvryWorkgDay)$|^(IntrvlDay:((0[2-9])|([1-2][0-9])|3[0-1]))$|^(IntrvlWkDay:0[1-9]:0[1-7])$|^(WkInMnthDay:0[1-5]:0[1-7])$|^(IntrvlMnthDay:(0[1-6]|12|24):(-0[1-5]|0[1-9]|[12][0-9]|3[01]))$|^(QtrDay:(ENGLISH|SCOTTISH|RECEIVED))$
+                Reference:
+                  description: 'Unique reference, as assigned by the creditor, to unambiguously refer to the payment transaction.
+
+                    Usage: If available, the initiating party should provide this reference in the structured remittance information, to enable reconciliation by the creditor upon receipt of the amount of money.
+
+                    If the business context requires the use of a creditor reference or a payment remit identification, and only one identifier can be passed through the end-to-end chain, the creditor''s reference or payment remittance identification should be quoted in the end-to-end transaction identification.'
+                  type: string
+                  minLength: 1
+                  maxLength: 35
+                NumberOfPayments:
+                  description: Number of the payments that will be made in completing this frequency sequence including any executed since the sequence start date.
+                  type: string
+                  minLength: 1
+                  maxLength: 35
+                FirstPaymentDateTime:
+                  description: "The date on which the first payment for a Standing Order schedule will be made.All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
+                  type: string
+                  format: date-time
+                RecurringPaymentDateTime:
+                  description: "The date on which the first recurring payment for a Standing Order schedule will be made. \nUsage: This must be populated only if the first recurring date is different to the first payment date.All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
+                  type: string
+                  format: date-time
+                FinalPaymentDateTime:
+                  description: "The date on which the final payment for a Standing Order schedule will be made.All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
+                  type: string
+                  format: date-time
+                FirstPaymentAmount:
+                  type: object
+                  additionalProperties: false
+                  required:
+                  - Amount
+                  - Currency
+                  description: The amount of the first Standing Order
+                  properties:
+                    Amount:
+                      $ref: '#/components/schemas/OBActiveCurrencyAndAmount_SimpleType'
+                    Currency:
+                      $ref: '#/components/schemas/ActiveOrHistoricCurrencyCode'
+                RecurringPaymentAmount:
+                  type: object
+                  additionalProperties: false
+                  required:
+                  - Amount
+                  - Currency
+                  description: The amount of the recurring Standing Order
+                  properties:
+                    Amount:
+                      $ref: '#/components/schemas/OBActiveCurrencyAndAmount_SimpleType'
+                    Currency:
+                      $ref: '#/components/schemas/ActiveOrHistoricCurrencyCode'
+                FinalPaymentAmount:
+                  type: object
+                  additionalProperties: false
+                  required:
+                  - Amount
+                  - Currency
+                  description: The amount of the final Standing Order
+                  properties:
+                    Amount:
+                      $ref: '#/components/schemas/OBActiveCurrencyAndAmount_SimpleType'
+                    Currency:
+                      $ref: '#/components/schemas/ActiveOrHistoricCurrencyCode'
+                DebtorAccount:
+                  type: object
+                  additionalProperties: false
+                  required:
+                  - SchemeName
+                  - Identification
+                  description: Provides the details to identify the debtor account.
+                  properties:
+                    SchemeName:
+                      $ref: '#/components/schemas/OBExternalAccountIdentification4Code'
+                    Identification:
+                      $ref: '#/components/schemas/Identification_0'
+                    Name:
+                      description: 'The account name is the name or names of the account owner(s) represented at an account level, as displayed by the ASPSP''s online channels.
+
+                        Note, the account name is not the product name or the nickname of the account.'
+                      type: string
+                      minLength: 1
+                      maxLength: 350
+                    SecondaryIdentification:
+                      $ref: '#/components/schemas/SecondaryIdentification'
+                CreditorAccount:
+                  type: object
+                  additionalProperties: false
+                  required:
+                  - SchemeName
+                  - Identification
+                  - Name
+                  description: Identification assigned by an institution to identify an account. This identification is known by the account owner.
+                  properties:
+                    SchemeName:
+                      $ref: '#/components/schemas/OBExternalAccountIdentification4Code'
+                    Identification:
+                      $ref: '#/components/schemas/Identification_0'
+                    Name:
+                      description: 'The account name is the name or names of the account owner(s) represented at an account level.
+
+                        Note, the account name is not the product name or the nickname of the account.
+
+                        OB: ASPSPs may carry out name validation for Confirmation of Payee, but it is not mandatory.'
+                      type: string
+                      minLength: 1
+                      maxLength: 350
+                    SecondaryIdentification:
+                      $ref: '#/components/schemas/SecondaryIdentification'
+                SupplementaryData:
+                  $ref: '#/components/schemas/OBSupplementaryData1'
+        Risk:
+          $ref: '#/components/schemas/OBRisk1'
+    SecondaryIdentification:
+      description: "This is secondary identification of the account, as assigned by the account servicing institution. \nThis can be used by building societies to additionally identify accounts with a roll number (in addition to a sort code and account number combination)."
+      type: string
+      minLength: 1
+      maxLength: 34
+    OBExternalExtendedAccountType1Code:
+      description: Specifies the extended type of account.
+      type: string
+      enum:
+      - Business
+      - BusinessSavingsAccount
+      - Charity
+      - Collection
+      - Corporate
+      - Ewallet
+      - Government
+      - Investment
+      - ISA
+      - JointPersonal
+      - Pension
+      - Personal
+      - PersonalSavingsAccount
+      - Premier
+      - Wealth
     OBRisk1:
       type: object
       additionalProperties: false
@@ -1363,56 +1398,21 @@ components:
       description: 'The Risk section is sent by the initiating party to the ASPSP.
 
         It is used to specify additional details for risk scoring for Payments.'
-    TownName:
-      description: Name of a built-up area, with defined boundaries, and a local government.
+    Identification_0:
+      description: Identification assigned by an institution to identify an account. This identification is known by the account owner.
       type: string
       minLength: 1
-      maxLength: 35
-    CountryCode:
-      description: Nation with its own government.
-      type: string
-      pattern: ^[A-Z]{2,2}$
-    OBActiveOrHistoricCurrencyAndAmount:
-      type: object
-      additionalProperties: false
-      required:
-      - Amount
-      - Currency
-      description: Amount of money associated with the charge type.
-      properties:
-        Amount:
-          $ref: '#/components/schemas/OBActiveCurrencyAndAmount_SimpleType'
-        Currency:
-          $ref: '#/components/schemas/ActiveOrHistoricCurrencyCode'
-    OBExternalExtendedAccountType1Code:
-      description: Specifies the extended type of account.
-      type: string
-      enum:
-      - Business
-      - BusinessSavingsAccount
-      - Charity
-      - Collection
-      - Corporate
-      - Ewallet
-      - Government
-      - Investment
-      - ISA
-      - JointPersonal
-      - Pension
-      - Personal
-      - PersonalSavingsAccount
-      - Premier
-      - Wealth
-    BuildingNumber:
-      description: Number that identifies the position of a building on a street.
-      type: string
-      minLength: 1
-      maxLength: 16
+      maxLength: 256
     OBSupplementaryData1:
       type: object
       properties: {}
       additionalProperties: true
       description: Additional information that can not be captured in the structured fields and/or any other specific block.
+    StreetName:
+      description: Name of a street or thoroughfare.
+      type: string
+      minLength: 1
+      maxLength: 70
     OBWriteDomesticStandingOrderConsentResponse6:
       type: object
       additionalProperties: false
