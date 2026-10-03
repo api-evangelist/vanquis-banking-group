@@ -86,134 +86,6 @@ paths:
         - accounts
 components:
   schemas:
-    Name_2:
-      description: Name of Service User.
-      type: string
-      minLength: 1
-      maxLength: 70
-    OBExternalDirectDebitStatus1Code:
-      description: Specifies the status of the direct debit in code form.
-      type: string
-      enum:
-      - Active
-      - Inactive
-    Links:
-      type: object
-      description: Links relevant to the payload
-      properties:
-        Self:
-          type: string
-          format: uri
-        First:
-          type: string
-          format: uri
-        Prev:
-          type: string
-          format: uri
-        Next:
-          type: string
-          format: uri
-        Last:
-          type: string
-          format: uri
-      additionalProperties: false
-      required:
-      - Self
-    MandateIdentification:
-      description: Direct Debit reference. For AUDDIS service users provide Core Reference. For non AUDDIS service users provide Core reference if possible or last used reference.
-      type: string
-      minLength: 1
-      maxLength: 35
-    PreviousPaymentDateTime:
-      description: "Date of most recent direct debit collection.All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
-      type: string
-      format: date-time
-    OBActiveOrHistoricCurrencyAndAmount_0:
-      type: object
-      required:
-      - Amount
-      - Currency
-      description: The amount of the most recent direct debit collection.
-      properties:
-        Amount:
-          $ref: '#/components/schemas/OBActiveCurrencyAndAmount_SimpleType'
-        Currency:
-          $ref: '#/components/schemas/ActiveOrHistoricCurrencyCode_1'
-    Meta:
-      title: MetaData
-      type: object
-      description: Meta Data relevant to the payload
-      properties:
-        TotalPages:
-          type: integer
-          format: int32
-        FirstAvailableDateTime:
-          $ref: '#/components/schemas/ISODateTime'
-        LastAvailableDateTime:
-          $ref: '#/components/schemas/ISODateTime'
-      additionalProperties: false
-    ISODateTime:
-      description: "All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
-      type: string
-      format: date-time
-    OBActiveCurrencyAndAmount_SimpleType:
-      description: A number of monetary units specified in an active currency where the unit of currency is explicit and compliant with ISO 4217.
-      type: string
-      pattern: ^\d{1,13}$|^\d{1,13}\.\d{1,5}$
-    OBError1:
-      type: object
-      properties:
-        ErrorCode:
-          description: Low level textual error code, e.g., UK.OBIE.Field.Missing
-          type: string
-          x-namespaced-enum:
-          - UK.OBIE.Field.Expected
-          - UK.OBIE.Field.Invalid
-          - UK.OBIE.Field.InvalidDate
-          - UK.OBIE.Field.Missing
-          - UK.OBIE.Field.Unexpected
-          - UK.OBIE.Header.Invalid
-          - UK.OBIE.Header.Missing
-          - UK.OBIE.Reauthenticate
-          - UK.OBIE.Resource.ConsentMismatch
-          - UK.OBIE.Resource.InvalidConsentStatus
-          - UK.OBIE.Resource.InvalidFormat
-          - UK.OBIE.Resource.NotFound
-          - UK.OBIE.Rules.AfterCutOffDateTime
-          - UK.OBIE.Rules.DuplicateReference
-          - UK.OBIE.Signature.Invalid
-          - UK.OBIE.Signature.InvalidClaim
-          - UK.OBIE.Signature.Malformed
-          - UK.OBIE.Signature.Missing
-          - UK.OBIE.Signature.MissingClaim
-          - UK.OBIE.Signature.Unexpected
-          - UK.OBIE.UnexpectedError
-          - UK.OBIE.Unsupported.AccountIdentifier
-          - UK.OBIE.Unsupported.AccountSecondaryIdentifier
-          - UK.OBIE.Unsupported.Currency
-          - UK.OBIE.Unsupported.Frequency
-          - UK.OBIE.Unsupported.LocalInstrument
-          - UK.OBIE.Unsupported.Scheme
-        Message:
-          description: 'A description of the error that occurred. e.g., ''A mandatory field isn''t supplied'' or ''RequestedExecutionDateTime must be in future''
-
-            OBIE doesn''t standardise this field'
-          type: string
-          minLength: 1
-          maxLength: 500
-        Path:
-          description: Recommended but optional reference to the JSON Path of the field with error, e.g., Data.Initiation.InstructedAmount.Currency
-          type: string
-          minLength: 1
-          maxLength: 500
-        Url:
-          description: URL to help remediate the problem, or provide more information, or to API Reference, or help etc
-          type: string
-      required:
-      - ErrorCode
-      - Message
-      additionalProperties: false
-      minProperties: 1
     OBReadDirectDebit2:
       type: object
       required:
@@ -268,11 +140,37 @@ components:
       type: string
       minLength: 1
       maxLength: 40
-    DirectDebitId:
-      description: A unique and immutable identifier used to identify the direct debit resource. This identifier has no meaning to the account owner.
+    Name_2:
+      description: Name of Service User.
       type: string
       minLength: 1
-      maxLength: 40
+      maxLength: 70
+    ISODateTime:
+      description: "All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
+      type: string
+      format: date-time
+    Links:
+      type: object
+      description: Links relevant to the payload
+      properties:
+        Self:
+          type: string
+          format: uri
+        First:
+          type: string
+          format: uri
+        Prev:
+          type: string
+          format: uri
+        Next:
+          type: string
+          format: uri
+        Last:
+          type: string
+          format: uri
+      additionalProperties: false
+      required:
+      - Self
     OBErrorResponse1:
       description: An array of detail error codes, and messages, and URLs to documentation to help remediation.
       type: object
@@ -302,31 +200,122 @@ components:
       - Message
       - Errors
       additionalProperties: false
+    Meta:
+      title: MetaData
+      type: object
+      description: Meta Data relevant to the payload
+      properties:
+        TotalPages:
+          type: integer
+          format: int32
+        FirstAvailableDateTime:
+          $ref: '#/components/schemas/ISODateTime'
+        LastAvailableDateTime:
+          $ref: '#/components/schemas/ISODateTime'
+      additionalProperties: false
+    OBError1:
+      type: object
+      properties:
+        ErrorCode:
+          description: Low level textual error code, e.g., UK.OBIE.Field.Missing
+          type: string
+          x-namespaced-enum:
+          - UK.OBIE.Field.Expected
+          - UK.OBIE.Field.Invalid
+          - UK.OBIE.Field.InvalidDate
+          - UK.OBIE.Field.Missing
+          - UK.OBIE.Field.Unexpected
+          - UK.OBIE.Header.Invalid
+          - UK.OBIE.Header.Missing
+          - UK.OBIE.Reauthenticate
+          - UK.OBIE.Resource.ConsentMismatch
+          - UK.OBIE.Resource.InvalidConsentStatus
+          - UK.OBIE.Resource.InvalidFormat
+          - UK.OBIE.Resource.NotFound
+          - UK.OBIE.Rules.AfterCutOffDateTime
+          - UK.OBIE.Rules.DuplicateReference
+          - UK.OBIE.Signature.Invalid
+          - UK.OBIE.Signature.InvalidClaim
+          - UK.OBIE.Signature.Malformed
+          - UK.OBIE.Signature.Missing
+          - UK.OBIE.Signature.MissingClaim
+          - UK.OBIE.Signature.Unexpected
+          - UK.OBIE.UnexpectedError
+          - UK.OBIE.Unsupported.AccountIdentifier
+          - UK.OBIE.Unsupported.AccountSecondaryIdentifier
+          - UK.OBIE.Unsupported.Currency
+          - UK.OBIE.Unsupported.Frequency
+          - UK.OBIE.Unsupported.LocalInstrument
+          - UK.OBIE.Unsupported.Scheme
+        Message:
+          description: 'A description of the error that occurred. e.g., ''A mandatory field isn''t supplied'' or ''RequestedExecutionDateTime must be in future''
+
+            OBIE doesn''t standardise this field'
+          type: string
+          minLength: 1
+          maxLength: 500
+        Path:
+          description: Recommended but optional reference to the JSON Path of the field with error, e.g., Data.Initiation.InstructedAmount.Currency
+          type: string
+          minLength: 1
+          maxLength: 500
+        Url:
+          description: URL to help remediate the problem, or provide more information, or to API Reference, or help etc
+          type: string
+      required:
+      - ErrorCode
+      - Message
+      additionalProperties: false
+      minProperties: 1
+    MandateIdentification:
+      description: Direct Debit reference. For AUDDIS service users provide Core Reference. For non AUDDIS service users provide Core reference if possible or last used reference.
+      type: string
+      minLength: 1
+      maxLength: 35
+    OBActiveOrHistoricCurrencyAndAmount_0:
+      type: object
+      required:
+      - Amount
+      - Currency
+      description: The amount of the most recent direct debit collection.
+      properties:
+        Amount:
+          $ref: '#/components/schemas/OBActiveCurrencyAndAmount_SimpleType'
+        Currency:
+          $ref: '#/components/schemas/ActiveOrHistoricCurrencyCode_1'
+    OBExternalDirectDebitStatus1Code:
+      description: Specifies the status of the direct debit in code form.
+      type: string
+      enum:
+      - Active
+      - Inactive
+    DirectDebitId:
+      description: A unique and immutable identifier used to identify the direct debit resource. This identifier has no meaning to the account owner.
+      type: string
+      minLength: 1
+      maxLength: 40
+    OBActiveCurrencyAndAmount_SimpleType:
+      description: A number of monetary units specified in an active currency where the unit of currency is explicit and compliant with ISO 4217.
+      type: string
+      pattern: ^\d{1,13}$|^\d{1,13}\.\d{1,5}$
     ActiveOrHistoricCurrencyCode_1:
       description: A code allocated to a currency by a Maintenance Agency under an international identification scheme, as described in the latest edition of the international standard ISO 4217 "Codes for the representation of currencies and funds".
       type: string
       pattern: ^[A-Z]{3,3}$
+    PreviousPaymentDateTime:
+      description: "Date of most recent direct debit collection.All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
+      type: string
+      format: date-time
   responses:
-    406Error:
-      description: Not Acceptable
+    401Error:
+      description: Unauthorized
       headers:
         x-fapi-interaction-id:
           description: An RFC4122 UID used as a correlation id.
           required: true
           schema:
             type: string
-    429Error:
-      description: Too Many Requests
-      headers:
-        Retry-After:
-          description: Number in seconds to wait
-          schema:
-            type: integer
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          schema:
-            type: string
-    200DirectDebitsRead:
+    200AccountsAccountIdDirectDebitsRead:
       description: Direct Debits Read
       headers:
         x-fapi-interaction-id:
@@ -344,26 +333,8 @@ components:
         application/jose+jwe:
           schema:
             $ref: '#/components/schemas/OBReadDirectDebit2'
-    400Error:
-      description: Bad request
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-    500Error:
-      description: Internal Server Error
+    403Error:
+      description: Forbidden
       headers:
         x-fapi-interaction-id:
           description: An RFC4122 UID used as a correlation id.
@@ -388,24 +359,8 @@ components:
           required: true
           schema:
             type: string
-    401Error:
-      description: Unauthorized
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-    404Error:
-      description: Not found
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-    403Error:
-      description: Forbidden
+    400Error:
+      description: Bad request
       headers:
         x-fapi-interaction-id:
           description: An RFC4122 UID used as a correlation id.
@@ -422,7 +377,7 @@ components:
         application/jose+jwe:
           schema:
             $ref: '#/components/schemas/OBErrorResponse1'
-    200AccountsAccountIdDirectDebitsRead:
+    200DirectDebitsRead:
       description: Direct Debits Read
       headers:
         x-fapi-interaction-id:
@@ -440,14 +395,52 @@ components:
         application/jose+jwe:
           schema:
             $ref: '#/components/schemas/OBReadDirectDebit2'
+    404Error:
+      description: Not found
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    406Error:
+      description: Not Acceptable
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    500Error:
+      description: Internal Server Error
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+    429Error:
+      description: Too Many Requests
+      headers:
+        Retry-After:
+          description: Number in seconds to wait
+          schema:
+            type: integer
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          schema:
+            type: string
   parameters:
-    x-fapi-interaction-id:
-      in: header
-      name: x-fapi-interaction-id
-      required: false
-      description: An RFC4122 UID used as a correlation id.
-      schema:
-        type: string
     x-fapi-customer-ip-address:
       in: header
       name: x-fapi-customer-ip-address
@@ -455,11 +448,11 @@ components:
       description: The PSU's IP address if the PSU is currently logged in with the TPP.
       schema:
         type: string
-    AccountId:
-      name: AccountId
-      in: path
-      description: AccountId
-      required: true
+    x-fapi-interaction-id:
+      in: header
+      name: x-fapi-interaction-id
+      required: false
+      description: An RFC4122 UID used as a correlation id.
       schema:
         type: string
     Authorization:
@@ -467,13 +460,6 @@ components:
       name: Authorization
       required: true
       description: An Authorisation Token as per https://tools.ietf.org/html/rfc6750
-      schema:
-        type: string
-    x-customer-user-agent:
-      in: header
-      name: x-customer-user-agent
-      description: Indicates the user-agent that the PSU is using.
-      required: false
       schema:
         type: string
     x-fapi-auth-date:
@@ -484,6 +470,20 @@ components:
       schema:
         type: string
         pattern: ^(Mon|Tue|Wed|Thu|Fri|Sat|Sun), \d{2} (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4} \d{2}:\d{2}:\d{2} (GMT|UTC)$
+    AccountId:
+      name: AccountId
+      in: path
+      description: AccountId
+      required: true
+      schema:
+        type: string
+    x-customer-user-agent:
+      in: header
+      name: x-customer-user-agent
+      description: Indicates the user-agent that the PSU is using.
+      required: false
+      schema:
+        type: string
   securitySchemes:
     TPPOAuth2Security:
       type: oauth2

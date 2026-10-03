@@ -125,43 +125,19 @@ components:
       description: Nation with its own government, occupying a particular territory.
       type: string
       pattern: ^[A-Z]{2,2}$
-    PostCode:
-      description: Identifier consisting of a group of letters and/or numbers that is added to a postal address to assist the sorting of mail.
+    FullLegalName:
+      description: Specifies a character string with a maximum length of 350 characters.
       type: string
       minLength: 1
-      maxLength: 16
-    TownName:
-      description: Name of a built-up area, with defined boundaries, and a local government.
+      maxLength: 350
+    PhoneNumber_0:
+      description: Collection of information that identifies a phone number, as defined by telecom services.
       type: string
-      minLength: 1
-      maxLength: 35
-    OBReadParty2:
-      type: object
-      required:
-      - Data
-      properties:
-        Data:
-          type: object
-          properties:
-            Party:
-              $ref: '#/components/schemas/OBParty2'
-        Links:
-          $ref: '#/components/schemas/Links'
-        Meta:
-          $ref: '#/components/schemas/Meta'
-      additionalProperties: false
-    OBExternalPartyType1Code:
-      description: Party type, in a coded form.
+      pattern: \+[0-9]{1,3}-[0-9()+\-]{1,30}
+    ISODateTime:
+      description: "All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
       type: string
-      enum:
-      - Delegate
-      - Joint
-      - Sole
-    PartyId:
-      description: A unique and immutable identifier used to identify the customer resource. This identifier has no meaning to the account owner.
-      type: string
-      minLength: 1
-      maxLength: 40
+      format: date-time
     Links:
       type: object
       description: Links relevant to the payload
@@ -184,28 +160,6 @@ components:
       additionalProperties: false
       required:
       - Self
-    OBAddressTypeCode:
-      description: Identifies the nature of the postal address.
-      type: string
-      enum:
-      - Business
-      - Correspondence
-      - DeliveryTo
-      - MailTo
-      - POBox
-      - Postal
-      - Residential
-      - Statement
-    StreetName:
-      description: Name of a street or thoroughfare.
-      type: string
-      minLength: 1
-      maxLength: 70
-    BuildingNumber:
-      description: Number that identifies the position of a building on a street.
-      type: string
-      minLength: 1
-      maxLength: 16
     OBReadParty3:
       type: object
       required:
@@ -223,156 +177,11 @@ components:
         Meta:
           $ref: '#/components/schemas/Meta'
       additionalProperties: false
-    Meta:
-      title: MetaData
-      type: object
-      description: Meta Data relevant to the payload
-      properties:
-        TotalPages:
-          type: integer
-          format: int32
-        FirstAvailableDateTime:
-          $ref: '#/components/schemas/ISODateTime'
-        LastAvailableDateTime:
-          $ref: '#/components/schemas/ISODateTime'
-      additionalProperties: false
-    ISODateTime:
-      description: "All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
-      type: string
-      format: date-time
-    OBExternalAccountRole1Code:
-      description: A party’s role with respect to the related account.
-      type: string
-      x-namespaced-enum:
-      - UK.OBIE.Administrator
-      - UK.OBIE.Beneficiary
-      - UK.OBIE.CustodianForMinor
-      - UK.OBIE.Granter
-      - UK.OBIE.LegalGuardian
-      - UK.OBIE.OtherParty
-      - UK.OBIE.PowerOfAttorney
-      - UK.OBIE.Principal
-      - UK.OBIE.Protector
-      - UK.OBIE.RegisteredShareholderName
-      - UK.OBIE.SecondaryOwner
-      - UK.OBIE.SeniorManagingOfficial
-      - UK.OBIE.Settlor
-      - UK.OBIE.SuccessorOnDeath
-    OBExternalLegalStructureType1Code:
-      description: Legal standing of the party.
-      type: string
-      x-namespaced-enum:
-      - UK.OBIE.CIC
-      - UK.OBIE.CIO
-      - UK.OBIE.Charity
-      - UK.OBIE.CoOp
-      - UK.OBIE.GeneralPartnership
-      - UK.OBIE.Individual
-      - UK.OBIE.LimitedLiabilityPartnership
-      - UK.OBIE.LimitedPartnership
-      - UK.OBIE.PrivateLimitedCompany
-      - UK.OBIE.PublicLimitedCompany
-      - UK.OBIE.ScottishLimitedPartnership
-      - UK.OBIE.Sole
-    EmailAddress:
-      description: Address for electronic mail (e-mail).
+    StreetName:
+      description: Name of a street or thoroughfare.
       type: string
       minLength: 1
-      maxLength: 256
-    Name_3:
-      description: Name by which a party is known and which is usually used to identify that party.
-      type: string
-      minLength: 1
-      maxLength: 350
-    FullLegalName:
-      description: Specifies a character string with a maximum length of 350 characters.
-      type: string
-      minLength: 1
-      maxLength: 350
-    OBError1:
-      type: object
-      properties:
-        ErrorCode:
-          description: Low level textual error code, e.g., UK.OBIE.Field.Missing
-          type: string
-          x-namespaced-enum:
-          - UK.OBIE.Field.Expected
-          - UK.OBIE.Field.Invalid
-          - UK.OBIE.Field.InvalidDate
-          - UK.OBIE.Field.Missing
-          - UK.OBIE.Field.Unexpected
-          - UK.OBIE.Header.Invalid
-          - UK.OBIE.Header.Missing
-          - UK.OBIE.Reauthenticate
-          - UK.OBIE.Resource.ConsentMismatch
-          - UK.OBIE.Resource.InvalidConsentStatus
-          - UK.OBIE.Resource.InvalidFormat
-          - UK.OBIE.Resource.NotFound
-          - UK.OBIE.Rules.AfterCutOffDateTime
-          - UK.OBIE.Rules.DuplicateReference
-          - UK.OBIE.Signature.Invalid
-          - UK.OBIE.Signature.InvalidClaim
-          - UK.OBIE.Signature.Malformed
-          - UK.OBIE.Signature.Missing
-          - UK.OBIE.Signature.MissingClaim
-          - UK.OBIE.Signature.Unexpected
-          - UK.OBIE.UnexpectedError
-          - UK.OBIE.Unsupported.AccountIdentifier
-          - UK.OBIE.Unsupported.AccountSecondaryIdentifier
-          - UK.OBIE.Unsupported.Currency
-          - UK.OBIE.Unsupported.Frequency
-          - UK.OBIE.Unsupported.LocalInstrument
-          - UK.OBIE.Unsupported.Scheme
-        Message:
-          description: 'A description of the error that occurred. e.g., ''A mandatory field isn''t supplied'' or ''RequestedExecutionDateTime must be in future''
-
-            OBIE doesn''t standardise this field'
-          type: string
-          minLength: 1
-          maxLength: 500
-        Path:
-          description: Recommended but optional reference to the JSON Path of the field with error, e.g., Data.Initiation.InstructedAmount.Currency
-          type: string
-          minLength: 1
-          maxLength: 500
-        Url:
-          description: URL to help remediate the problem, or provide more information, or to API Reference, or help etc
-          type: string
-      required:
-      - ErrorCode
-      - Message
-      additionalProperties: false
-      minProperties: 1
-    OBPartyRelationships1:
-      type: object
-      description: The Party's relationships with other resources.
-      properties:
-        Account:
-          type: object
-          required:
-          - Related
-          - Id
-          description: Relationship to the Account resource.
-          properties:
-            Related:
-              description: Absolute URI to the related resource.
-              type: string
-              format: uri
-            Id:
-              description: Unique identification as assigned by the ASPSP to uniquely identify the related resource.
-              type: string
-              minLength: 1
-              maxLength: 40
-    CountrySubDivision:
-      description: Identifies a subdivision of a country eg, state, region, county.
-      type: string
-      minLength: 1
-      maxLength: 35
-    PartyNumber:
-      description: Number assigned by an agent to identify its customer.
-      type: string
-      minLength: 1
-      maxLength: 35
+      maxLength: 70
     OBErrorResponse1:
       description: An array of detail error codes, and messages, and URLs to documentation to help remediation.
       type: object
@@ -402,10 +211,19 @@ components:
       - Message
       - Errors
       additionalProperties: false
-    PhoneNumber_1:
-      description: Collection of information that identifies a mobile phone number, as defined by telecom services.
-      type: string
-      pattern: \+[0-9]{1,3}-[0-9()+\-]{1,30}
+    Meta:
+      title: MetaData
+      type: object
+      description: Meta Data relevant to the payload
+      properties:
+        TotalPages:
+          type: integer
+          format: int32
+        FirstAvailableDateTime:
+          $ref: '#/components/schemas/ISODateTime'
+        LastAvailableDateTime:
+          $ref: '#/components/schemas/ISODateTime'
+      additionalProperties: false
     OBParty2:
       type: object
       required:
@@ -467,13 +285,195 @@ components:
               Country:
                 $ref: '#/components/schemas/CountryCode'
       additionalProperties: false
-    PhoneNumber_0:
-      description: Collection of information that identifies a phone number, as defined by telecom services.
+    CountrySubDivision:
+      description: Identifies a subdivision of a country eg, state, region, county.
+      type: string
+      minLength: 1
+      maxLength: 35
+    PhoneNumber_1:
+      description: Collection of information that identifies a mobile phone number, as defined by telecom services.
       type: string
       pattern: \+[0-9]{1,3}-[0-9()+\-]{1,30}
+    EmailAddress:
+      description: Address for electronic mail (e-mail).
+      type: string
+      minLength: 1
+      maxLength: 256
+    OBError1:
+      type: object
+      properties:
+        ErrorCode:
+          description: Low level textual error code, e.g., UK.OBIE.Field.Missing
+          type: string
+          x-namespaced-enum:
+          - UK.OBIE.Field.Expected
+          - UK.OBIE.Field.Invalid
+          - UK.OBIE.Field.InvalidDate
+          - UK.OBIE.Field.Missing
+          - UK.OBIE.Field.Unexpected
+          - UK.OBIE.Header.Invalid
+          - UK.OBIE.Header.Missing
+          - UK.OBIE.Reauthenticate
+          - UK.OBIE.Resource.ConsentMismatch
+          - UK.OBIE.Resource.InvalidConsentStatus
+          - UK.OBIE.Resource.InvalidFormat
+          - UK.OBIE.Resource.NotFound
+          - UK.OBIE.Rules.AfterCutOffDateTime
+          - UK.OBIE.Rules.DuplicateReference
+          - UK.OBIE.Signature.Invalid
+          - UK.OBIE.Signature.InvalidClaim
+          - UK.OBIE.Signature.Malformed
+          - UK.OBIE.Signature.Missing
+          - UK.OBIE.Signature.MissingClaim
+          - UK.OBIE.Signature.Unexpected
+          - UK.OBIE.UnexpectedError
+          - UK.OBIE.Unsupported.AccountIdentifier
+          - UK.OBIE.Unsupported.AccountSecondaryIdentifier
+          - UK.OBIE.Unsupported.Currency
+          - UK.OBIE.Unsupported.Frequency
+          - UK.OBIE.Unsupported.LocalInstrument
+          - UK.OBIE.Unsupported.Scheme
+        Message:
+          description: 'A description of the error that occurred. e.g., ''A mandatory field isn''t supplied'' or ''RequestedExecutionDateTime must be in future''
+
+            OBIE doesn''t standardise this field'
+          type: string
+          minLength: 1
+          maxLength: 500
+        Path:
+          description: Recommended but optional reference to the JSON Path of the field with error, e.g., Data.Initiation.InstructedAmount.Currency
+          type: string
+          minLength: 1
+          maxLength: 500
+        Url:
+          description: URL to help remediate the problem, or provide more information, or to API Reference, or help etc
+          type: string
+      required:
+      - ErrorCode
+      - Message
+      additionalProperties: false
+      minProperties: 1
+    PartyNumber:
+      description: Number assigned by an agent to identify its customer.
+      type: string
+      minLength: 1
+      maxLength: 35
+    OBExternalPartyType1Code:
+      description: Party type, in a coded form.
+      type: string
+      enum:
+      - Delegate
+      - Joint
+      - Sole
+    BuildingNumber:
+      description: Number that identifies the position of a building on a street.
+      type: string
+      minLength: 1
+      maxLength: 16
+    TownName:
+      description: Name of a built-up area, with defined boundaries, and a local government.
+      type: string
+      minLength: 1
+      maxLength: 35
+    OBReadParty2:
+      type: object
+      required:
+      - Data
+      properties:
+        Data:
+          type: object
+          properties:
+            Party:
+              $ref: '#/components/schemas/OBParty2'
+        Links:
+          $ref: '#/components/schemas/Links'
+        Meta:
+          $ref: '#/components/schemas/Meta'
+      additionalProperties: false
+    PostCode:
+      description: Identifier consisting of a group of letters and/or numbers that is added to a postal address to assist the sorting of mail.
+      type: string
+      minLength: 1
+      maxLength: 16
+    OBPartyRelationships1:
+      type: object
+      description: The Party's relationships with other resources.
+      properties:
+        Account:
+          type: object
+          required:
+          - Related
+          - Id
+          description: Relationship to the Account resource.
+          properties:
+            Related:
+              description: Absolute URI to the related resource.
+              type: string
+              format: uri
+            Id:
+              description: Unique identification as assigned by the ASPSP to uniquely identify the related resource.
+              type: string
+              minLength: 1
+              maxLength: 40
+    OBExternalLegalStructureType1Code:
+      description: Legal standing of the party.
+      type: string
+      x-namespaced-enum:
+      - UK.OBIE.CIC
+      - UK.OBIE.CIO
+      - UK.OBIE.Charity
+      - UK.OBIE.CoOp
+      - UK.OBIE.GeneralPartnership
+      - UK.OBIE.Individual
+      - UK.OBIE.LimitedLiabilityPartnership
+      - UK.OBIE.LimitedPartnership
+      - UK.OBIE.PrivateLimitedCompany
+      - UK.OBIE.PublicLimitedCompany
+      - UK.OBIE.ScottishLimitedPartnership
+      - UK.OBIE.Sole
+    OBExternalAccountRole1Code:
+      description: A party’s role with respect to the related account.
+      type: string
+      x-namespaced-enum:
+      - UK.OBIE.Administrator
+      - UK.OBIE.Beneficiary
+      - UK.OBIE.CustodianForMinor
+      - UK.OBIE.Granter
+      - UK.OBIE.LegalGuardian
+      - UK.OBIE.OtherParty
+      - UK.OBIE.PowerOfAttorney
+      - UK.OBIE.Principal
+      - UK.OBIE.Protector
+      - UK.OBIE.RegisteredShareholderName
+      - UK.OBIE.SecondaryOwner
+      - UK.OBIE.SeniorManagingOfficial
+      - UK.OBIE.Settlor
+      - UK.OBIE.SuccessorOnDeath
+    Name_3:
+      description: Name by which a party is known and which is usually used to identify that party.
+      type: string
+      minLength: 1
+      maxLength: 350
+    OBAddressTypeCode:
+      description: Identifies the nature of the postal address.
+      type: string
+      enum:
+      - Business
+      - Correspondence
+      - DeliveryTo
+      - MailTo
+      - POBox
+      - Postal
+      - Residential
+      - Statement
+    PartyId:
+      description: A unique and immutable identifier used to identify the customer resource. This identifier has no meaning to the account owner.
+      type: string
+      minLength: 1
+      maxLength: 40
   responses:
-    406Error:
-      description: Not Acceptable
+    401Error:
+      description: Unauthorized
       headers:
         x-fapi-interaction-id:
           description: An RFC4122 UID used as a correlation id.
@@ -491,26 +491,8 @@ components:
           description: An RFC4122 UID used as a correlation id.
           schema:
             type: string
-    200PartyRead:
-      description: Parties Read
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBReadParty2'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBReadParty2'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBReadParty2'
-    400Error:
-      description: Bad request
+    403Error:
+      description: Forbidden
       headers:
         x-fapi-interaction-id:
           description: An RFC4122 UID used as a correlation id.
@@ -527,58 +509,6 @@ components:
         application/jose+jwe:
           schema:
             $ref: '#/components/schemas/OBErrorResponse1'
-    200AccountsAccountIdPartyRead:
-      description: Parties Read
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBReadParty2'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBReadParty2'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBReadParty2'
-    500Error:
-      description: Internal Server Error
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-    405Error:
-      description: Method Not Allowed
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-    401Error:
-      description: Unauthorized
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
     200AccountsAccountIdPartiesRead:
       description: Parties Read
       headers:
@@ -597,8 +527,16 @@ components:
         application/jose+jwe:
           schema:
             $ref: '#/components/schemas/OBReadParty3'
-    403Error:
-      description: Forbidden
+    405Error:
+      description: Method Not Allowed
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    400Error:
+      description: Bad request
       headers:
         x-fapi-interaction-id:
           description: An RFC4122 UID used as a correlation id.
@@ -623,14 +561,69 @@ components:
           required: true
           schema:
             type: string
+    200PartyRead:
+      description: Parties Read
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBReadParty2'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBReadParty2'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBReadParty2'
+    200AccountsAccountIdPartyRead:
+      description: Parties Read
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBReadParty2'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBReadParty2'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBReadParty2'
+    406Error:
+      description: Not Acceptable
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    500Error:
+      description: Internal Server Error
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
   parameters:
-    x-fapi-interaction-id:
-      in: header
-      name: x-fapi-interaction-id
-      required: false
-      description: An RFC4122 UID used as a correlation id.
-      schema:
-        type: string
     x-fapi-customer-ip-address:
       in: header
       name: x-fapi-customer-ip-address
@@ -638,25 +631,11 @@ components:
       description: The PSU's IP address if the PSU is currently logged in with the TPP.
       schema:
         type: string
-    AccountId:
-      name: AccountId
-      in: path
-      description: AccountId
-      required: true
-      schema:
-        type: string
     Authorization:
       in: header
       name: Authorization
       required: true
       description: An Authorisation Token as per https://tools.ietf.org/html/rfc6750
-      schema:
-        type: string
-    x-customer-user-agent:
-      in: header
-      name: x-customer-user-agent
-      description: Indicates the user-agent that the PSU is using.
-      required: false
       schema:
         type: string
     x-fapi-auth-date:
@@ -667,6 +646,27 @@ components:
       schema:
         type: string
         pattern: ^(Mon|Tue|Wed|Thu|Fri|Sat|Sun), \d{2} (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4} \d{2}:\d{2}:\d{2} (GMT|UTC)$
+    x-fapi-interaction-id:
+      in: header
+      name: x-fapi-interaction-id
+      required: false
+      description: An RFC4122 UID used as a correlation id.
+      schema:
+        type: string
+    AccountId:
+      name: AccountId
+      in: path
+      description: AccountId
+      required: true
+      schema:
+        type: string
+    x-customer-user-agent:
+      in: header
+      name: x-customer-user-agent
+      description: Indicates the user-agent that the PSU is using.
+      required: false
+      schema:
+        type: string
   securitySchemes:
     TPPOAuth2Security:
       type: oauth2

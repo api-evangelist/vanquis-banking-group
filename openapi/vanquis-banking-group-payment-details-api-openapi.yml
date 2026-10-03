@@ -262,234 +262,6 @@ paths:
         - payments
 components:
   responses:
-    406Error:
-      description: Not Acceptable
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-    429Error:
-      description: Too Many Requests
-      headers:
-        Retry-After:
-          description: Number in seconds to wait
-          schema:
-            type: integer
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-    200DomesticStandingOrdersDomesticStandingOrderIdPaymentDetailsRead:
-      description: Payment Details Read
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-        x-jws-signature:
-          description: 'Header containing a detached JWS signature of the body of the payload.
-
-            '
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
-    200FilePaymentsFilePaymentIdPaymentDetailsRead:
-      description: Payment Details Read
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-        x-jws-signature:
-          description: 'Header containing a detached JWS signature of the body of the payload.
-
-            '
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
-    200InternationalScheduledPaymentsInternationalScheduledPaymentIdPaymentDetailsRead:
-      description: Payment Details Read
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-        x-jws-signature:
-          description: 'Header containing a detached JWS signature of the body of the payload.
-
-            '
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
-    400Error:
-      description: Bad request
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-        x-jws-signature:
-          description: 'Header containing a detached JWS signature of the body of the payload.
-
-            '
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-    200DomesticPaymentsDomesticPaymentIdPaymentDetailsRead:
-      description: Payment Details Read
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-        x-jws-signature:
-          description: 'Header containing a detached JWS signature of the body of the payload.
-
-            '
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
-    200DomesticScheduledPaymentsDomesticScheduledPaymentIdPaymentDetailsRead:
-      description: Payment Details Read
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-        x-jws-signature:
-          description: 'Header containing a detached JWS signature of the body of the payload.
-
-            '
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
-    500Error:
-      description: Internal Server Error
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-        x-jws-signature:
-          description: 'Header containing a detached JWS signature of the body of the payload.
-
-            '
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBErrorResponse1'
-    405Error:
-      description: Method Not Allowed
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-    200InternationalStandingOrdersInternationalStandingOrderPaymentIdPaymentDetailsRead:
-      description: Payment Details Read
-      headers:
-        x-fapi-interaction-id:
-          description: An RFC4122 UID used as a correlation id.
-          required: true
-          schema:
-            type: string
-        x-jws-signature:
-          description: 'Header containing a detached JWS signature of the body of the payload.
-
-            '
-          required: true
-          schema:
-            type: string
-      content:
-        application/json; charset=utf-8:
-          schema:
-            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
-        application/json:
-          schema:
-            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
-        application/jose+jwe:
-          schema:
-            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
     401Error:
       description: Unauthorized
       headers:
@@ -498,7 +270,7 @@ components:
           required: true
           schema:
             type: string
-    200InternationalPaymentsInternationalPaymentIdPaymentDetailsRead:
+    200InternationalStandingOrdersInternationalStandingOrderPaymentIdPaymentDetailsRead:
       description: Payment Details Read
       headers:
         x-fapi-interaction-id:
@@ -548,6 +320,114 @@ components:
         application/jose+jwe:
           schema:
             $ref: '#/components/schemas/OBErrorResponse1'
+    200InternationalScheduledPaymentsInternationalScheduledPaymentIdPaymentDetailsRead:
+      description: Payment Details Read
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+        x-jws-signature:
+          description: 'Header containing a detached JWS signature of the body of the payload.
+
+            '
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+    200DomesticPaymentsDomesticPaymentIdPaymentDetailsRead:
+      description: Payment Details Read
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+        x-jws-signature:
+          description: 'Header containing a detached JWS signature of the body of the payload.
+
+            '
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+    405Error:
+      description: Method Not Allowed
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    400Error:
+      description: Bad request
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+        x-jws-signature:
+          description: 'Header containing a detached JWS signature of the body of the payload.
+
+            '
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+    200FilePaymentsFilePaymentIdPaymentDetailsRead:
+      description: Payment Details Read
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+        x-jws-signature:
+          description: 'Header containing a detached JWS signature of the body of the payload.
+
+            '
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
     404Error:
       description: Not found
       headers:
@@ -556,93 +436,131 @@ components:
           required: true
           schema:
             type: string
-  parameters:
-    x-fapi-interaction-id:
-      in: header
-      name: x-fapi-interaction-id
-      required: false
-      description: An RFC4122 UID used as a correlation id.
-      schema:
-        type: string
-    x-fapi-customer-ip-address:
-      in: header
-      name: x-fapi-customer-ip-address
-      required: false
-      description: The PSU's IP address if the PSU is currently logged in with the TPP.
-      schema:
-        type: string
-    InternationalScheduledPaymentId:
-      name: InternationalScheduledPaymentId
-      in: path
-      description: InternationalScheduledPaymentId
-      required: true
-      schema:
-        type: string
-    Authorization:
-      in: header
-      name: Authorization
-      required: true
-      description: An Authorisation Token as per https://tools.ietf.org/html/rfc6750
-      schema:
-        type: string
-    FilePaymentId:
-      name: FilePaymentId
-      in: path
-      description: FilePaymentId
-      required: true
-      schema:
-        type: string
-    DomesticStandingOrderId:
-      name: DomesticStandingOrderId
-      in: path
-      description: DomesticStandingOrderId
-      required: true
-      schema:
-        type: string
-    DomesticScheduledPaymentId:
-      name: DomesticScheduledPaymentId
-      in: path
-      description: DomesticScheduledPaymentId
-      required: true
-      schema:
-        type: string
-    InternationalPaymentId:
-      name: InternationalPaymentId
-      in: path
-      description: InternationalPaymentId
-      required: true
-      schema:
-        type: string
-    DomesticPaymentId:
-      name: DomesticPaymentId
-      in: path
-      description: DomesticPaymentId
-      required: true
-      schema:
-        type: string
-    InternationalStandingOrderPaymentId:
-      name: InternationalStandingOrderPaymentId
-      in: path
-      description: InternationalStandingOrderPaymentId
-      required: true
-      schema:
-        type: string
-    x-customer-user-agent:
-      in: header
-      name: x-customer-user-agent
-      description: Indicates the user-agent that the PSU is using.
-      required: false
-      schema:
-        type: string
-    x-fapi-auth-date:
-      in: header
-      name: x-fapi-auth-date
-      required: false
-      description: "The time when the PSU last logged in with the TPP. \nAll dates in the HTTP headers are represented as RFC 7231 Full Dates. An example is below: \nSun, 10 Sep 2017 19:43:31 UTC"
-      schema:
-        type: string
-        pattern: ^(Mon|Tue|Wed|Thu|Fri|Sat|Sun), \d{2} (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4} \d{2}:\d{2}:\d{2} (GMT|UTC)$
+    200DomesticScheduledPaymentsDomesticScheduledPaymentIdPaymentDetailsRead:
+      description: Payment Details Read
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+        x-jws-signature:
+          description: 'Header containing a detached JWS signature of the body of the payload.
+
+            '
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+    200DomesticStandingOrdersDomesticStandingOrderIdPaymentDetailsRead:
+      description: Payment Details Read
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+        x-jws-signature:
+          description: 'Header containing a detached JWS signature of the body of the payload.
+
+            '
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+    406Error:
+      description: Not Acceptable
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+    200InternationalPaymentsInternationalPaymentIdPaymentDetailsRead:
+      description: Payment Details Read
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+        x-jws-signature:
+          description: 'Header containing a detached JWS signature of the body of the payload.
+
+            '
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBWritePaymentDetailsResponse1'
+    500Error:
+      description: Internal Server Error
+      headers:
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
+        x-jws-signature:
+          description: 'Header containing a detached JWS signature of the body of the payload.
+
+            '
+          required: true
+          schema:
+            type: string
+      content:
+        application/json; charset=utf-8:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/json:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+        application/jose+jwe:
+          schema:
+            $ref: '#/components/schemas/OBErrorResponse1'
+    429Error:
+      description: Too Many Requests
+      headers:
+        Retry-After:
+          description: Number in seconds to wait
+          schema:
+            type: integer
+        x-fapi-interaction-id:
+          description: An RFC4122 UID used as a correlation id.
+          required: true
+          schema:
+            type: string
   schemas:
+    ISODateTime:
+      description: "All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
+      type: string
+      format: date-time
     Links:
       type: object
       additionalProperties: false
@@ -665,6 +583,35 @@ components:
           format: uri
       required:
       - Self
+    OBErrorResponse1:
+      description: An array of detail error codes, and messages, and URLs to documentation to help remediation.
+      type: object
+      additionalProperties: false
+      properties:
+        Code:
+          description: High level textual error code, to help categorize the errors.
+          type: string
+          minLength: 1
+          maxLength: 40
+        Id:
+          description: A unique reference for the error instance, for audit purposes, in case of unknown/unclassified errors.
+          type: string
+          minLength: 1
+          maxLength: 40
+        Message:
+          description: Brief Error message, e.g., 'There is something wrong with the request parameters provided'
+          type: string
+          minLength: 1
+          maxLength: 500
+        Errors:
+          items:
+            $ref: '#/components/schemas/OBError1'
+          type: array
+          minItems: 1
+      required:
+      - Code
+      - Message
+      - Errors
     OBWritePaymentDetailsResponse1:
       type: object
       additionalProperties: false
@@ -766,28 +713,6 @@ components:
           $ref: '#/components/schemas/ISODateTime'
         LastAvailableDateTime:
           $ref: '#/components/schemas/ISODateTime'
-    ISODateTime:
-      description: "All dates in the JSON payloads are represented in ISO 8601 date-time format. \nAll date-time fields in responses must include the timezone. An example is below:\n2017-04-05T10:43:07+00:00"
-      type: string
-      format: date-time
-    OBExternalLocalInstrument1Code:
-      description: 'User community specific instrument.
-
-        Usage: This element is used to specify a local instrument, local clearing option and/or further qualify the service or service level.'
-      type: string
-      x-namespaced-enum:
-      - UK.OBIE.BACS
-      - UK.OBIE.BalanceTransfer
-      - UK.OBIE.CHAPS
-      - UK.OBIE.Euro1
-      - UK.OBIE.FPS
-      - UK.OBIE.Link
-      - UK.OBIE.MoneyTransfer
-      - UK.OBIE.Paym
-      - UK.OBIE.SEPACreditTransfer
-      - UK.OBIE.SEPAInstantCreditTransfer
-      - UK.OBIE.SWIFT
-      - UK.OBIE.Target2
     OBError1:
       type: object
       additionalProperties: false
@@ -842,35 +767,110 @@ components:
       - ErrorCode
       - Message
       minProperties: 1
-    OBErrorResponse1:
-      description: An array of detail error codes, and messages, and URLs to documentation to help remediation.
-      type: object
-      additionalProperties: false
-      properties:
-        Code:
-          description: High level textual error code, to help categorize the errors.
-          type: string
-          minLength: 1
-          maxLength: 40
-        Id:
-          description: A unique reference for the error instance, for audit purposes, in case of unknown/unclassified errors.
-          type: string
-          minLength: 1
-          maxLength: 40
-        Message:
-          description: Brief Error message, e.g., 'There is something wrong with the request parameters provided'
-          type: string
-          minLength: 1
-          maxLength: 500
-        Errors:
-          items:
-            $ref: '#/components/schemas/OBError1'
-          type: array
-          minItems: 1
-      required:
-      - Code
-      - Message
-      - Errors
+    OBExternalLocalInstrument1Code:
+      description: 'User community specific instrument.
+
+        Usage: This element is used to specify a local instrument, local clearing option and/or further qualify the service or service level.'
+      type: string
+      x-namespaced-enum:
+      - UK.OBIE.BACS
+      - UK.OBIE.BalanceTransfer
+      - UK.OBIE.CHAPS
+      - UK.OBIE.Euro1
+      - UK.OBIE.FPS
+      - UK.OBIE.Link
+      - UK.OBIE.MoneyTransfer
+      - UK.OBIE.Paym
+      - UK.OBIE.SEPACreditTransfer
+      - UK.OBIE.SEPAInstantCreditTransfer
+      - UK.OBIE.SWIFT
+      - UK.OBIE.Target2
+  parameters:
+    InternationalScheduledPaymentId:
+      name: InternationalScheduledPaymentId
+      in: path
+      description: InternationalScheduledPaymentId
+      required: true
+      schema:
+        type: string
+    x-fapi-customer-ip-address:
+      in: header
+      name: x-fapi-customer-ip-address
+      required: false
+      description: The PSU's IP address if the PSU is currently logged in with the TPP.
+      schema:
+        type: string
+    InternationalPaymentId:
+      name: InternationalPaymentId
+      in: path
+      description: InternationalPaymentId
+      required: true
+      schema:
+        type: string
+    DomesticScheduledPaymentId:
+      name: DomesticScheduledPaymentId
+      in: path
+      description: DomesticScheduledPaymentId
+      required: true
+      schema:
+        type: string
+    x-fapi-interaction-id:
+      in: header
+      name: x-fapi-interaction-id
+      required: false
+      description: An RFC4122 UID used as a correlation id.
+      schema:
+        type: string
+    FilePaymentId:
+      name: FilePaymentId
+      in: path
+      description: FilePaymentId
+      required: true
+      schema:
+        type: string
+    DomesticPaymentId:
+      name: DomesticPaymentId
+      in: path
+      description: DomesticPaymentId
+      required: true
+      schema:
+        type: string
+    Authorization:
+      in: header
+      name: Authorization
+      required: true
+      description: An Authorisation Token as per https://tools.ietf.org/html/rfc6750
+      schema:
+        type: string
+    InternationalStandingOrderPaymentId:
+      name: InternationalStandingOrderPaymentId
+      in: path
+      description: InternationalStandingOrderPaymentId
+      required: true
+      schema:
+        type: string
+    DomesticStandingOrderId:
+      name: DomesticStandingOrderId
+      in: path
+      description: DomesticStandingOrderId
+      required: true
+      schema:
+        type: string
+    x-fapi-auth-date:
+      in: header
+      name: x-fapi-auth-date
+      required: false
+      description: "The time when the PSU last logged in with the TPP. \nAll dates in the HTTP headers are represented as RFC 7231 Full Dates. An example is below: \nSun, 10 Sep 2017 19:43:31 UTC"
+      schema:
+        type: string
+        pattern: ^(Mon|Tue|Wed|Thu|Fri|Sat|Sun), \d{2} (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec) \d{4} \d{2}:\d{2}:\d{2} (GMT|UTC)$
+    x-customer-user-agent:
+      in: header
+      name: x-customer-user-agent
+      description: Indicates the user-agent that the PSU is using.
+      required: false
+      schema:
+        type: string
   securitySchemes:
     TPPOAuth2Security:
       type: oauth2
